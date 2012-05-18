@@ -4,6 +4,7 @@ import dk.statsbiblioteket.util.Files;
 import org.apache.commons.cli.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 
 public class YouseeIngesterCLI {
@@ -119,6 +120,10 @@ public class YouseeIngesterCLI {
             parseError(e.toString());
             return;
         }
+
+        String uuid = "uuid:" + UUID.randomUUID().toString();
+        System.out.println(uuid);
+        exit(0);
     }
 
     private static void parseError(String message){
