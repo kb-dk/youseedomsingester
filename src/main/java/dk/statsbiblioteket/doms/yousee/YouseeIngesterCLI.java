@@ -122,7 +122,8 @@ public class YouseeIngesterCLI {
         }
 
         String uuid = "uuid:" + UUID.randomUUID().toString();
-        System.out.println(uuid);
+
+        System.out.println("{"+"\"domsPid\":\""+uuid+"\"}");
         exit(0);
     }
 

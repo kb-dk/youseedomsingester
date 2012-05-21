@@ -10,15 +10,21 @@
         <version>3</version>
     </parent>
 
+
+    <groupId>dk.statsbiblioteket.doms</groupId>
+    <artifactId>yousee-doms-ingest-client</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+
+
     <scm>
         <connection>scm:git:git://github.com/statsbiblioteket/${artifactId}.git</connection>
         <url>scm:git:git://github.com/statsbiblioteket:${artifactId}.git</url>
         <developerConnection>scm:git:git://github.com/statsbiblioteket/${artifactId}.git</developerConnection>
     </scm>
 
-    <groupId>dk.statsbiblioteket.doms</groupId>
-    <artifactId>yousee-doms-ingest-client</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+
 
     <dependencies>
         <dependency>
@@ -32,13 +38,17 @@
             <version>0.5.5</version>
         </dependency>
         <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.9</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -52,7 +62,29 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.2</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/assembly/assembly.xml</descriptor>
+                    </descriptors>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
 
     </build>
+
 </project>
