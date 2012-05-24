@@ -2,10 +2,11 @@ package dk.statsbiblioteket.doms.yousee;
 
 import dk.statsbiblioteket.util.Files;
 import org.apache.commons.cli.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
-
 
 public class YouseeIngesterCLI {
 
@@ -23,6 +24,7 @@ public class YouseeIngesterCLI {
                                                                         "The file containing the crosscheck profile in xml");
     private static final Option METADATA_LOCATION_OPTION = new Option("metadata", true,
                                                                       "The file containing the bibliographic metadata in xml");
+    private static final Logger log = LoggerFactory.getLogger(YouseeIngesterCLI.class);
 
 
     static{
@@ -121,15 +123,26 @@ public class YouseeIngesterCLI {
             return;
         }
 
-        String uuid = "uuid:" + UUID.randomUUID().toString();
+        log.debug("Read parameters for '{}'. Context: '{}'", context.getFilename(), context);
 
-        System.out.println("{"+"\"domsPid\":\""+uuid+"\"}");
+        String uuid;
+        try {
+            uuid = IngesterFactory.getIngester().ingest(context);
+        } catch (Exception e) {
+            System.err.println("Unable to ingest '" + context.getFilename() + "' into doms: " + e);
+            log.error("Unable to ingest '{}' into doms. Context: {}", new Object[]{context.getFilename(), context, e});
+            exit(2);
+            return;
+        }
+
+        System.out.println("{" + "\"domsPid\":\"" + uuid + "\"}");
         exit(0);
     }
 
     private static void parseError(String message){
         System.err.println("Error parsing arguments");
         System.err.println(message);
+        log.error("Error parsing arguments: '{}'", message);
         printUsage();
         exit(1);
     }

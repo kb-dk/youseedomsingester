@@ -1,15 +1,9 @@
 package dk.statsbiblioteket.doms.yousee;
 
 /**
- * Created by IntelliJ IDEA.
- * User: abr
- * Date: 5/16/12
- * Time: 3:00 PM
- * To change this template use File | Settings | File Templates.
+ * Tuple of input data for ingest.
  */
 public class IngestContext {
-
-
     private String remoteURL;
     private String checksum;
     private String ffprobeContents;
@@ -67,5 +61,12 @@ public class IngestContext {
 
     public void setFilename(String filename) {
         this.filename = filename;
+    }
+
+    @Override
+    public String toString() {
+        return "IngestContext{" + "remoteURL='" + remoteURL + '\'' + ", checksum='" + checksum + '\''
+                + ", ffprobeContents='" + ffprobeContents + '\'' + ", crosscheckContents='" + crosscheckContents + '\''
+                + ", youseeMetadataContents='" + youseeMetadataContents + '\'' + ", filename='" + filename + '\'' + '}';
     }
 }
