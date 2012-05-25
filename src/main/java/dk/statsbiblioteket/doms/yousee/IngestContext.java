@@ -1,5 +1,7 @@
 package dk.statsbiblioteket.doms.yousee;
 
+import java.util.Properties;
+
 /**
  * Tuple of input data for ingest.
  */
@@ -10,6 +12,7 @@ public class IngestContext {
     private String crosscheckContents;
     private String youseeMetadataContents;
     private String filename;
+    private Properties config;
 
     public IngestContext(String filename) {
         this.filename = filename;
@@ -63,10 +66,19 @@ public class IngestContext {
         this.filename = filename;
     }
 
+    public Properties getConfig() {
+        return config;
+    }
+
+    public void setConfig(Properties config) {
+        this.config = config;
+    }
+
     @Override
     public String toString() {
         return "IngestContext{" + "remoteURL='" + remoteURL + '\'' + ", checksum='" + checksum + '\''
                 + ", ffprobeContents='" + ffprobeContents + '\'' + ", crosscheckContents='" + crosscheckContents + '\''
-                + ", youseeMetadataContents='" + youseeMetadataContents + '\'' + ", filename='" + filename + '\'' + '}';
+                + ", youseeMetadataContents='" + youseeMetadataContents + '\'' + ", filename='" + filename + '\''
+                + ", configFile='" + config + '\'' + '}';
     }
 }
