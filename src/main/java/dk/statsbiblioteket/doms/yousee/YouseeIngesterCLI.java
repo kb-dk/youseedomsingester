@@ -16,7 +16,7 @@ public class YouseeIngesterCLI {
      * @param args Options. Run with no parameters to get usage.
      */
     public static void main( String[] args ) {
-        IngestContext context = IngesterFactory.getOptionParser().parseOptions(args);
+        IngestContext context = new OptionParser().parseOptions(args);
         if (context == null) {
             System.exit(1);
             return;
@@ -24,7 +24,7 @@ public class YouseeIngesterCLI {
 
         String uuid;
         try {
-            uuid = IngesterFactory.getIngester(context.getConfig()).ingest(context);
+            uuid = new IngesterFactory(context.getConfig()).getIngester().ingest(context);
         } catch (Exception e) {
             System.err.println("Unable to ingest '" + context.getFilename() + "' into doms: " + e);
             log.error("Unable to ingest '{}' into doms. Context: {}", new Object[]{context.getFilename(), context, e});

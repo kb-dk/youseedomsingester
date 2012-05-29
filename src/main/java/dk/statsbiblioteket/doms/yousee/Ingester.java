@@ -1,11 +1,7 @@
 package dk.statsbiblioteket.doms.yousee;
 
 /**
- * Created by IntelliJ IDEA.
- * User: kfc
- * Date: 5/23/12
- * Time: 4:04 PM
- * To change this template use File | Settings | File Templates.
+ * Ingest objects with given context.
  */
 public interface Ingester {
     /**
