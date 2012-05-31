@@ -7,9 +7,9 @@ import java.util.Properties;
  */
 public class IngestContext {
     private String remoteURL;
-    private String checksum;
     private String ffprobeContents;
     private String crosscheckContents;
+    // Checksum is assumed to be part of received metadata.
     private String youseeMetadataContents;
     private String filename;
     private Properties config;
@@ -24,14 +24,6 @@ public class IngestContext {
 
     public void setRemoteURL(String remoteURL) {
         this.remoteURL = remoteURL;
-    }
-
-    public String getChecksum() {
-        return checksum;
-    }
-
-    public void setChecksum(String checksum) {
-        this.checksum = checksum;
     }
 
     public String getFfprobeContents() {
@@ -76,9 +68,13 @@ public class IngestContext {
 
     @Override
     public String toString() {
-        return "IngestContext{" + "remoteURL='" + remoteURL + '\'' + ", checksum='" + checksum + '\''
-                + ", ffprobeContents='" + ffprobeContents + '\'' + ", crosscheckContents='" + crosscheckContents + '\''
-                + ", youseeMetadataContents='" + youseeMetadataContents + '\'' + ", filename='" + filename + '\''
-                + ", configFile='" + config + '\'' + '}';
+        return "IngestContext{"
+                + "remoteURL='" + remoteURL + '\''
+                + ", ffprobeContents='" + ffprobeContents + '\''
+                + ", crosscheckContents='" + crosscheckContents + '\''
+                + ", youseeMetadataContents='" + youseeMetadataContents + '\''
+                + ", filename='" + filename + '\''
+                + ", configFile='" + config + '\''
+                + '}';
     }
 }

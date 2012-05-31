@@ -7,31 +7,34 @@ import dk.statsbiblioteket.doms.central.InvalidCredentialsException;
 import dk.statsbiblioteket.doms.central.InvalidResourceException;
 import dk.statsbiblioteket.doms.central.MethodFailedException;
 
+import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.Properties;
 
 /** Ingester for Doms. */
 public class DomsIngester implements Ingester {
-    private static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.yousee.template";
-    //TODO: Constant? From FFPROBE? Input?
-    private static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.yousee.formaturi";
+    private static final String TEMPLATE_PROPERTY
+            = "dk.statsbiblioteket.doms.yousee.template";
+
 
     private final DocumentBuilder db;
-    private final CentralWebservice webservice;
+    private final CentralWebservice centralWebservice;
     private final Properties config;
 
     public DomsIngester(Properties config, CentralWebservice webservice) {
         this.config = config;
         this.db = getDocumentBuilder();
-        this.webservice = webservice;
+        this.centralWebservice = webservice;
     }
 
     private DocumentBuilder getDocumentBuilder() {
         try {
-            DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilderFactory documentBuilderFactory
+                    = DocumentBuilderFactory.newInstance();
             documentBuilderFactory.setNamespaceAware(true);
             documentBuilderFactory.setCoalescing(true);
             documentBuilderFactory.setIgnoringElementContentWhitespace(true);
@@ -42,62 +45,108 @@ public class DomsIngester implements Ingester {
         }
     }
 
+    /**
+     * Ingest data from context into DOMS via template given by config.
+     * @param context Command-line input parameters containing metadata to be
+     * ingested in DOMS.
+     * @return The PID of the resulting DOMS file-object, now containing the
+     * metadata from context.
+     */
     @Override
     public String ingest(IngestContext context) {
-        String template = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_RadioTVFile");
-        String formatUri = config
-                .getProperty(FORMAT_URI_PROPERTY, "info:mime/video/MP2T;codecs=\"aac_latm,dvbsub,h264\"");
+        // Template object to clone to get new objects, get from properties file
+        String template = config.getProperty(TEMPLATE_PROPERTY,
+                "doms:Template_RadioTVFile"); // 2nd arg is default value
+
+        // Get FFProbe output from context
+        String FFProbeOutput = context.getFfprobeContents();
+        //String formatUri = config.getProperty(
+        //        "dk.statsbiblioteket.doms.yousee.formaturi",
+        //        "info:mime/video/MP2T;codecs=\"aac_latm,dvbsub,h264\"");
 
         try {
-            // Look up object with the given URL
+            String formatUri
+                    = (new FFProbeParser()).getFormatURIFromFFProbeOutput(
+                    FFProbeOutput);
+
+            // Via DOMS Central, get PID of DOMS file-object which corresponds
+            // to the file with the given URL (URL from context).
             String message = "Processed by '" + getClass().getName() + "'";
-            String objectWithURL;
-            try {
-                objectWithURL = webservice.getFileObjectWithURL(context.getRemoteURL());
-            } catch (InvalidResourceException e) {
+            String PIDOfObjectWithURL;
+
+            PIDOfObjectWithURL = centralWebservice.getFileObjectWithURL(
+                    context.getRemoteURL());
+            if (PIDOfObjectWithURL == null) {
                 // If not found, clone template (config)
-                objectWithURL = webservice.newObject(template, null, message);
-                webservice.addFileFromPermanentURL(objectWithURL, context.getFilename(), null, context.getRemoteURL(),
-                                                   formatUri, message);
+                PIDOfObjectWithURL = centralWebservice.newObject(template, null,
+                        message);
+                centralWebservice.addFileFromPermanentURL(PIDOfObjectWithURL,
+                        context.getFilename(), null, context.getRemoteURL(),
+                        formatUri, message);
             }
 
-            webservice.markInProgressObject(Arrays.asList(objectWithURL), message);
+            // Mark object as in progress
+            centralWebservice.markInProgressObject(Arrays.asList(
+                    PIDOfObjectWithURL), message);
 
             // Update elements of object from context
-            setDatastreamContents(webservice, objectWithURL, "FFPROBE", context.getFfprobeContents(), message);
-            setDatastreamContents(webservice, objectWithURL, "CROSSCHECK", context.getCrosscheckContents(), message);
-            //TODO: Name of datastream?
-            setDatastreamContents(webservice, objectWithURL, "METADATA", context.getChecksum(), message);
-            //TODO: Checksum (In METADATA? Own datastream?)
+            setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
+                    "FFPROBE", context.getFfprobeContents(), message);
+            setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
+                    "CROSSCHECK", context.getCrosscheckContents(), message);
+            // Checksum is assumed to be part of received metadata.
+            setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
+                    "BROADCAST_METADATA", context.getYouseeMetadataContents(),
+                    message);
             //TODO: Update content models with format uris, CROSSCHECK, METADATA
-            //TODO: Update templates
 
-            webservice.markPublishedObject(Arrays.asList(objectWithURL), message);
-            return objectWithURL;
+            // Mark object as published
+            centralWebservice.markPublishedObject(Arrays.asList(
+                    PIDOfObjectWithURL), message);
+
+            return PIDOfObjectWithURL;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
 
-    private void setDatastreamContents(CentralWebservice webservice, String objectWithURL, String datastreamName,
-                                       String datastreamContents, String message)
-            throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
-        String datastreamContentsOrig = webservice.getDatastreamContents(objectWithURL, datastreamName);
-        if (!xmlEquals(datastreamContentsOrig, datastreamContents)) {
-            webservice.modifyDatastream(objectWithURL, datastreamName, datastreamContents, message);
+    private void setDatastreamContents(CentralWebservice webservice,
+                                       String objectWithURL,
+                                       String datastreamName,
+                                       String datastreamContents,
+                                       String message)
+            throws InvalidCredentialsException, InvalidResourceException,
+            MethodFailedException {
+        String datastreamContentsOrig = "";
+        boolean update = false;
+        try {
+            datastreamContentsOrig
+                    = webservice.getDatastreamContents(objectWithURL,
+                    datastreamName);
+            update = !xmlEquals(datastreamContentsOrig, datastreamContents);
+        } catch (InvalidResourceException e) {
+            update = true;
+        }
+        if (update) {
+            webservice.modifyDatastream(objectWithURL, datastreamName,
+                    datastreamContents, message);
         }
     }
 
-    private boolean xmlEquals(String ffprobeOrig, String ffprobeContents) {
+    protected boolean xmlEquals(String ffprobeOrig, String ffprobeContents) {
         try {
-            Document doc1 = db.parse(ffprobeOrig);
+            Document doc1= db.parse(new ByteArrayInputStream(
+                    ffprobeOrig.getBytes()));
             doc1.normalizeDocument();
 
-            Document doc2 = db.parse(ffprobeContents);
+            Document doc2 = db.parse(new ByteArrayInputStream(
+                    ffprobeContents.getBytes()));
             doc2.normalizeDocument();
             return doc1.isEqualNode(doc2);
         } catch (Exception e) {
             return false;
         }
     }
+
+
 }

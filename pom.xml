@@ -50,10 +50,15 @@
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.0.3</version>
+        </dependency>
+        <!--dependency>
+            <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
             <version>1.0.3</version>
             <scope>runtime</scope>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>dk.statsbiblioteket.doms.central</groupId>
             <artifactId>centralWebservice-interface</artifactId>

@@ -25,14 +25,12 @@ public class OptionParser {
             = new Option("url", true, "The permanent url to the file");
     private static final Option FFPROBE_LOCATION_OPTION
             = new Option("ffprobe", true, "The file containing the ffprobe profile in xml");
-    private static final Option CHECKSUM_OPTION
-            = new Option("checksum", true, "The checksum of the file");
     private static final Option CROSSCHECK_LOCATION_OPTION
             = new Option("crosscheck", true, "The file containing the crosscheck profile in xml");
     private static final Option METADATA_LOCATION_OPTION
             = new Option("metadata", true, "The file containing the bibliographic metadata in xml");
     private static final Option CONFIG_OPTION
-            = new Option("cinfig", true, "A property file with configuration");
+            = new Option("config", true, "A property file with configuration");
 
     private static Options options;
     static {
@@ -40,7 +38,6 @@ public class OptionParser {
         OptionParser.options.addOption(OptionParser.FILENAME_OPTION);
         OptionParser.options.addOption(OptionParser.URL_OPTION);
         OptionParser.options.addOption(OptionParser.FFPROBE_LOCATION_OPTION);
-        OptionParser.options.addOption(OptionParser.CHECKSUM_OPTION);
         OptionParser.options.addOption(OptionParser.CROSSCHECK_LOCATION_OPTION);
         OptionParser.options.addOption(OptionParser.METADATA_LOCATION_OPTION);
         for (Object option : OptionParser.options.getOptions()) {
@@ -60,7 +57,8 @@ public class OptionParser {
      * Options referring files will load the contents of those files.
      *
      * @param args Options.
-     * @return The context parsed from options, or null on errors parsing or loading content.
+     * @return The context parsed from options, or null on errors parsing or
+     * loading content.
      */
     public IngestContext parseOptions(String[] args) {
         CommandLineParser parser = new PosixParser();
@@ -86,13 +84,6 @@ public class OptionParser {
         }
         context.setRemoteURL(url);
 
-        String checksum = cmd.getOptionValue(CHECKSUM_OPTION.getOpt());
-        if (checksum == null) {
-            parseError(CHECKSUM_OPTION.toString());
-            return null;
-        }
-        context.setChecksum(checksum);
-
         String ffprobeLocation = cmd.getOptionValue(FFPROBE_LOCATION_OPTION.getOpt());
         if (ffprobeLocation == null) {
             parseError(FFPROBE_LOCATION_OPTION.toString());
@@ -100,26 +91,29 @@ public class OptionParser {
         }
         try {
             String ffprobeContents = Files.loadString(new File(ffprobeLocation));
-            context.setCrosscheckContents(ffprobeContents);
+            context.setFfprobeContents(ffprobeContents);
         } catch (IOException e) {
             parseError(e.toString());
             return null;
         }
 
-        String crosscheckLocation = cmd.getOptionValue(CROSSCHECK_LOCATION_OPTION.getOpt());
+        String crosscheckLocation
+                = cmd.getOptionValue(CROSSCHECK_LOCATION_OPTION.getOpt());
         if (crosscheckLocation == null) {
             parseError(CROSSCHECK_LOCATION_OPTION.toString());
             return null;
         }
         try {
-            String crosscheckContents = Files.loadString(new File(crosscheckLocation));
+            String crosscheckContents
+                    = Files.loadString(new File(crosscheckLocation));
             context.setCrosscheckContents(crosscheckContents);
         } catch (IOException e) {
             parseError(e.toString());
             return null;
         }
 
-        String metadataLocation = cmd.getOptionValue(METADATA_LOCATION_OPTION.getOpt());
+        String metadataLocation
+                = cmd.getOptionValue(METADATA_LOCATION_OPTION.getOpt());
         if (metadataLocation == null) {
             parseError(METADATA_LOCATION_OPTION.toString());
             return null;
@@ -144,7 +138,8 @@ public class OptionParser {
             }
         }
 
-        log.debug("Read parameters for '{}'. Context: '{}'", context.getFilename(), context);
+        log.debug("Read parameters for '{}'. Context: '{}'",
+                context.getFilename(), context);
         return context;
     }
 
