@@ -9,17 +9,17 @@
     </parent>
 
 
-    <groupId>dk.statsbiblioteket.doms</groupId>
-    <artifactId>yousee-doms-ingest-client</artifactId>
+    <groupId>dk.statsbiblioteket.medieplatform</groupId>
+    <artifactId>yousee-doms-ingester</artifactId>
     <version>0.1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
 
 
     <scm>
-        <connection>scm:git:git://github.com/statsbiblioteket/${artifactId}.git</connection>
-        <url>scm:git:git://github.com/statsbiblioteket:${artifactId}.git</url>
-        <developerConnection>scm:git:git://github.com/statsbiblioteket/${artifactId}.git</developerConnection>
+        <connection>scm:git:git://github.com/statsbiblioteket/youseedomsingester.git</connection>
+        <url>scm:git:git://github.com/statsbiblioteket:youseedomsingester.git</url>
+        <developerConnection>scm:git:git://github.com/statsbiblioteket/youseedomsingester.git</developerConnection>
     </scm>
 
 

@@ -1,1 +1,11 @@
-<metadata></metadata>
+<BroadcastFileDescriptiveMetadata xmlns="http://doms.statsbiblioteket.dk/types/broadcastMetadata/0/1/#">
+  <channelIDs>
+    <channelID>dr1</channelID>
+  </channelIDs>
+  <format>mpegts</format>
+  <startTimeDate>20400409160000</startTimeDate>
+  <endTimeDate>20400409170000</endTimeDate>
+  <filename>dr1_yousee.2217592800-2040-04-09-16.00.00_2217596400-2040-04-09-17.00.00_ftp.ts</filename>
+  <checksum>ccccc9fbf8f5b122205275779baccbdb</checksum>
+  <recorder>yousee</recorder>
+</BroadcastFileDescriptiveMetadata>
