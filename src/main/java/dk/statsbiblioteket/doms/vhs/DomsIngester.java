@@ -1,12 +1,12 @@
-package dk.statsbiblioteket.doms.yousee;
-
-import dk.statsbiblioteket.doms.common.FFProbeParser;
-import org.w3c.dom.Document;
+package dk.statsbiblioteket.doms.vhs;
 
 import dk.statsbiblioteket.doms.central.CentralWebservice;
 import dk.statsbiblioteket.doms.central.InvalidCredentialsException;
 import dk.statsbiblioteket.doms.central.InvalidResourceException;
 import dk.statsbiblioteket.doms.central.MethodFailedException;
+import dk.statsbiblioteket.doms.common.FFProbeParser;
+import dk.statsbiblioteket.doms.vhs.Ingester;
+import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +18,7 @@ import java.util.Properties;
 /** Ingester for Doms. */
 public class DomsIngester implements Ingester {
     private static final String TEMPLATE_PROPERTY
-            = "dk.statsbiblioteket.doms.yousee.template";
+            = "dk.statsbiblioteket.doms.vhs.template";
 
 
     private final DocumentBuilder db;
@@ -60,9 +60,6 @@ public class DomsIngester implements Ingester {
 
         // Get FFProbe output from context
         String FFProbeOutput = context.getFfprobeContents();
-        //String formatUri = config.getProperty(
-        //        "dk.statsbiblioteket.doms.yousee.formaturi",
-        //        "info:mime/video/MP2T;codecs=\"aac_latm,dvbsub,h264\"");
 
         try {
             String formatUri
@@ -92,13 +89,11 @@ public class DomsIngester implements Ingester {
             // Update elements of object from context
             setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
                     "FFPROBE", context.getFfprobeContents(), message);
-            setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
-                    "CROSSCHECK", context.getCrosscheckContents(), message);
             // Checksum is assumed to be part of received metadata.
             setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
-                    "BROADCAST_METADATA", context.getYouseeMetadataContents(),
+                    "VHS_METADATA", context.getVHSMetadataContents(),
                     message);
-            //TODO: Update content models with format uris, CROSSCHECK, METADATA
+            //TODO: Update content models with format uris, METADATA
 
             // Mark object as published
             centralWebservice.markPublishedObject(Arrays.asList(

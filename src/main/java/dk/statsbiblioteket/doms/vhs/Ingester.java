@@ -1,6 +1,6 @@
-package dk.statsbiblioteket.doms.yousee;
+package dk.statsbiblioteket.doms.vhs;
 
-import dk.statsbiblioteket.doms.yousee.IngestContext;
+import dk.statsbiblioteket.doms.vhs.IngestContext;
 
 /**
  * Ingest objects with given context.
