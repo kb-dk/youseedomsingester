@@ -1,6 +1,5 @@
-package dk.statsbiblioteket.doms.vhs;
+package dk.statsbiblioteket.doms.common;
 
-import dk.statsbiblioteket.doms.vhs.IngestContext;
 
 /**
  * Ingest objects with given context.

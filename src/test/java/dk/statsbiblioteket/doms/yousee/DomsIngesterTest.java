@@ -1,6 +1,7 @@
 package dk.statsbiblioteket.doms.yousee;
 
 import dk.statsbiblioteket.doms.central.CentralWebservice;
+import dk.statsbiblioteket.doms.common.IngestContext;
 import dk.statsbiblioteket.util.Files;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class DomsIngesterTest {
         };
 
         // Create an ingest context to test with
-        IngestContext context = new OptionParser().parseOptions(args);
+        IngestContext context = new YouseeOptionParser().parseOptions(args);
         if (context == null) {
             //System.exit(1);
             //return;
@@ -43,7 +44,7 @@ public class DomsIngesterTest {
 
             CentralWebservice centralWebservice = new MockDomsWebservice();
 
-            DomsIngester ingester = new DomsIngester(config, centralWebservice);
+            YouseeDomsIngester ingester = new YouseeDomsIngester(config, centralWebservice);
 
             uuid = ingester.ingest(context);
         } catch (Exception e) {
@@ -78,7 +79,7 @@ public class DomsIngesterTest {
         };
 
         // Create an ingest context to test with
-        IngestContext context = new OptionParser().parseOptions(args);
+        IngestContext context = new YouseeOptionParser().parseOptions(args);
         if (context == null) {
             //System.exit(1);
             //return;
@@ -88,8 +89,7 @@ public class DomsIngesterTest {
         String uuid = "";
 
             Properties config = context.getConfig();
-
-            uuid = new IngesterFactory(context.getConfig()).getIngester().ingest(context);
+            uuid = new YouseeIngesterFactory(context.getConfig()).getIngester().ingest(context);
 
 
         //System.out.println("{\"domsPid\" : \"" + uuid + "\"}");
@@ -107,7 +107,7 @@ public class DomsIngesterTest {
         String ffprobeContents = Files.loadString(new File("src/test/resources/ffprobeSample.xml"));
         String ffprobeContentsDifferent = Files.loadString(new File("src/test/resources/ffprobeSample-different.xml"));
 
-        boolean equals = new DomsIngester(null, null).xmlEquals(ffprobeContents, ffprobeContentsDifferent);
+        boolean equals = new YouseeDomsIngester(null, null).xmlEquals(ffprobeContents, ffprobeContentsDifferent);
         assertTrue(equals);
 
     }

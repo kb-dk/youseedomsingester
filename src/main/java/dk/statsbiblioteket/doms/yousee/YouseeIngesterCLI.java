@@ -3,13 +3,15 @@ package dk.statsbiblioteket.doms.yousee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import dk.statsbiblioteket.doms.common.IngestContext;
+import dk.statsbiblioteket.doms.common.OptionParseException;
+
 /**
  * Command line interface for doms ingest in YouSee workflow.
  */
 public class YouseeIngesterCLI {
     /** Log for this class. */
-    private static final Logger log
-            = LoggerFactory.getLogger(YouseeIngesterCLI.class);
+    private static final Logger log = LoggerFactory.getLogger(YouseeIngesterCLI.class);
 
     /**
      * Parse options and ingest into doms.
@@ -17,15 +19,17 @@ public class YouseeIngesterCLI {
      * @param args Options. Run with no parameters to get usage.
      */
     public static void main(String[] args) {
-        IngestContext context = new OptionParser().parseOptions(args);
-        if (context == null) {
+        IngestContext context;
+		try {
+			context = new YouseeOptionParser().parseOptions(args);
+		} catch (OptionParseException e1) {
             System.exit(1);
             return;
-        }
+		}
 
         String uuid;
         try {
-            uuid = new IngesterFactory(context.getConfig()).getIngester().ingest(context);
+            uuid = new YouseeIngesterFactory(context.getConfig()).getIngester().ingest(context);
         } catch (Exception e) {
             System.err.println("Unable to ingest '" + context.getFilename()
                     + "' into doms: " + e);

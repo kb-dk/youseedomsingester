@@ -1,21 +1,24 @@
-package dk.statsbiblioteket.doms.vhs;
+package dk.statsbiblioteket.doms.yousee;
 
 import java.util.Properties;
+
+import dk.statsbiblioteket.doms.common.IngestContext;
 
 /**
  * Tuple of input data for ingest.
  */
-public class IngestContext {
+public class YouseeIngestContext implements IngestContext {
     private String remoteURL;
     private String ffprobeContents;
+    private String crosscheckContents;
     // Checksum is assumed to be part of received metadata.
-    private String VHSMetadataContents;
+    private String youseeMetadataContents;
     private String filename;
     private Properties config;
 
-    public IngestContext(String filename) {
+/*    public YouseeIngestContext(String filename) {
         this.filename = filename;
-    }
+    }*/
 
     public String getRemoteURL() {
         return remoteURL;
@@ -33,12 +36,20 @@ public class IngestContext {
         this.ffprobeContents = ffprobeContents;
     }
 
-    public String getVHSMetadataContents() {
-        return VHSMetadataContents;
+    public String getCrosscheckContents() {
+        return crosscheckContents;
     }
 
-    public void setVHSMetadataContents(String VHSMetadataContents) {
-        this.VHSMetadataContents = VHSMetadataContents;
+    public void setCrosscheckContents(String crosscheckContents) {
+        this.crosscheckContents = crosscheckContents;
+    }
+
+    public String getMetadataContents() {
+        return youseeMetadataContents;
+    }
+
+    public void setMetadataContents(String metadataContents) {
+        this.youseeMetadataContents = metadataContents;
     }
 
     public String getFilename() {
@@ -62,7 +73,8 @@ public class IngestContext {
         return "IngestContext{"
                 + "remoteURL='" + remoteURL + '\''
                 + ", ffprobeContents='" + ffprobeContents + '\''
-                + ", VHSMetadataContents='" + VHSMetadataContents + '\''
+                + ", crosscheckContents='" + crosscheckContents + '\''
+                + ", youseeMetadataContents='" + youseeMetadataContents + '\''
                 + ", filename='" + filename + '\''
                 + ", configFile='" + config + '\''
                 + '}';

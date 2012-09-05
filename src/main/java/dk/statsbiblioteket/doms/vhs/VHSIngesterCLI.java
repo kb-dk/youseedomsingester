@@ -1,8 +1,9 @@
 package dk.statsbiblioteket.doms.vhs;
 
-import dk.statsbiblioteket.doms.vhs.IngestContext;
-import dk.statsbiblioteket.doms.vhs.IngesterFactory;
-import dk.statsbiblioteket.doms.vhs.OptionParser;
+import dk.statsbiblioteket.doms.common.IngestContext;
+import dk.statsbiblioteket.doms.common.OptionParseException;
+import dk.statsbiblioteket.doms.vhs.VHSIngesterFactory;
+import dk.statsbiblioteket.doms.vhs.VHSOptionParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,8 +12,7 @@ import org.slf4j.LoggerFactory;
  */
 public class VHSIngesterCLI {
     /** Log for this class. */
-    private static final Logger log
-            = LoggerFactory.getLogger(VHSIngesterCLI.class);
+    private static final Logger log = LoggerFactory.getLogger(VHSIngesterCLI.class);
 
     /**
      * Parse options and ingest into doms.
@@ -20,15 +20,17 @@ public class VHSIngesterCLI {
      * @param args Options. Run with no parameters to get usage.
      */
     public static void main(String[] args) {
-        IngestContext context = new OptionParser().parseOptions(args);
-        if (context == null) {
-            System.exit(1);
+        IngestContext context;
+		try {
+			context = new VHSOptionParser().parseOptions(args);
+		} catch (OptionParseException e1) {
+			System.exit(1);
             return;
-        }
+		}
 
         String uuid;
         try {
-            uuid = new IngesterFactory(context.getConfig()).getIngester().ingest(context);
+            uuid = new VHSIngesterFactory(context.getConfig()).getIngester().ingest(context);
         } catch (Exception e) {
             System.err.println("Unable to ingest '" + context.getFilename()
                     + "' into doms: " + e);

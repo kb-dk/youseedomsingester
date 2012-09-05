@@ -25,6 +25,15 @@ import java.util.*;
 /**
  */
 public class FFProbeParser {
+
+	private final String allowedFormatName;
+	private final String formaturi;
+	
+	public FFProbeParser(String allowedFormatName, String formaturi) {
+		this.allowedFormatName = allowedFormatName;
+		this.formaturi = formaturi;
+	}
+	
     public String getFormatURIFromFFProbeOutput(String FFProbeOutput)
             throws XPathExpressionException, ParserConfigurationException,
             IOException, SAXException {
@@ -65,8 +74,8 @@ public class FFProbeParser {
         Collections.sort(codecs);
 
         String format_uri;
-        if (format_name.equals("mpegts")){
-            format_uri = "info:mime/video/MP2T";
+        if (format_name.equals(allowedFormatName)){
+            format_uri = formaturi;
         } else {
             throw new RuntimeException("Invalid ffprobe file, bad format name");
         }
