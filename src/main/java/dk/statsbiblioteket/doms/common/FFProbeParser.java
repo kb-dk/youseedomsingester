@@ -77,7 +77,8 @@ public class FFProbeParser {
         if (format_name.equals(allowedFormatName)){
             format_uri = formaturi;
         } else {
-            throw new RuntimeException("Invalid ffprobe file, bad format name");
+            throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" + 
+            		format_name + "', required: '" + allowedFormatName +"'");
         }
 
         if (codecs.size() > 0){
