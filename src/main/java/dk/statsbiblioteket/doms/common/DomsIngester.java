@@ -17,6 +17,10 @@ import java.util.Properties;
 
 /** Ingester for Doms. */
 public abstract class DomsIngester implements Ingester {
+	protected static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
+	protected static final String ALLOWED_FORMAT_NAME_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
+	protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
+	
     protected final DocumentBuilder db;
     protected final CentralWebservice centralWebservice;
     protected final Properties config;

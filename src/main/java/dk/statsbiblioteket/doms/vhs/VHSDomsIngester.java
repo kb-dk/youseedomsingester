@@ -10,10 +10,6 @@ import dk.statsbiblioteket.doms.common.IngestContext;
 
 /** Ingester for Doms. */
 public class VHSDomsIngester extends DomsIngester {
-    private static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
-    private static final String ALLOWED_FORMAT_NAME_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
-    private static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
-
     public VHSDomsIngester(Properties config, CentralWebservice webservice) {
     	super(config, webservice);
     }
