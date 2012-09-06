@@ -1,5 +1,7 @@
 package dk.statsbiblioteket.doms.common;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -8,6 +10,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import dk.statsbiblioteket.doms.vhs.VHSIngesterCLI;
+
 import java.io.ByteArrayInputStream;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
@@ -28,7 +33,8 @@ public class FFProbeParser {
 
 	private final String allowedFormatName;
 	private final String formaturi;
-	
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
 	public FFProbeParser(String allowedFormatName, String formaturi) {
 		this.allowedFormatName = allowedFormatName;
 		this.formaturi = formaturi;
@@ -80,7 +86,8 @@ public class FFProbeParser {
             throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" + 
             		format_name + "', required: '" + allowedFormatName +"'");
         }
-
+        //TODO FIXME find a fix for this
+/*
         if (codecs.size() > 0){
             format_uri= format_uri + ";codecs=\"";
             for (int i = 0; i < codecs.size(); i++){
@@ -92,7 +99,9 @@ public class FFProbeParser {
             }
             format_uri = format_uri + "\"";
         }
-
+*/
+        log.debug("allowedformat: '" + formaturi + "', actual format: '" + format_uri +"'");
+        
         return format_uri;
     }
 }
