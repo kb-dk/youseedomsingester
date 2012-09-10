@@ -7,11 +7,16 @@ import java.util.Properties;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dk.statsbiblioteket.doms.central.CentralWebservice;
 import dk.statsbiblioteket.doms.central.CentralWebserviceService;
 
 /** Create the object instances for doms ingester. */
 public abstract class IngesterFactory {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     private static final String DEFAULT_FEDORA_WEBSERVICE_URL 
     			= "http://localhost:7880/centralWebservice-service/central/?wsdl";
     private CentralWebservice centralWebservice;

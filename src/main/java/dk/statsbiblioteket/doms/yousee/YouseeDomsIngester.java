@@ -42,9 +42,8 @@ public class YouseeDomsIngester extends DomsIngester {
         //        "info:mime/video/MP2T;codecs=\"aac_latm,dvbsub,h264\"");
 
         try {
-            String formatUri
-                    = (new FFProbeParser("mpegts", "info:mime/video/MP2T")).getFormatURIFromFFProbeOutput(
-                    FFProbeOutput);
+            String formatUri = (new FFProbeParser("mpegts", "info:mime/video/MP2T", true))
+                    .getFormatURIFromFFProbeOutput(FFProbeOutput);
 
             // Via DOMS Central, get PID of DOMS file-object which corresponds
             // to the file with the given URL (URL from context).

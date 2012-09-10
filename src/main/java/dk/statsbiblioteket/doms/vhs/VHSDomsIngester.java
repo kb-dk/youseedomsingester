@@ -3,6 +3,9 @@ package dk.statsbiblioteket.doms.vhs;
 import java.util.Arrays;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import dk.statsbiblioteket.doms.central.CentralWebservice;
 import dk.statsbiblioteket.doms.common.DomsIngester;
 import dk.statsbiblioteket.doms.common.FFProbeParser;
@@ -10,6 +13,8 @@ import dk.statsbiblioteket.doms.common.IngestContext;
 
 /** Ingester for Doms. */
 public class VHSDomsIngester extends DomsIngester {
+    private final Logger log = LoggerFactory.getLogger(getClass());
+
     public VHSDomsIngester(Properties config, CentralWebservice webservice) {
     	super(config, webservice);
     }
@@ -35,12 +40,12 @@ public class VHSDomsIngester extends DomsIngester {
 
         String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY, "mpeg");
         String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");
-        
+                
         // Get FFProbe output from context
         String FFProbeOutput = vhsContext.getFfprobeContents();
 
         try {
-            String formatUri = (new FFProbeParser(allowedFormatName, validFormatUri))
+            String formatUri = (new FFProbeParser(allowedFormatName, validFormatUri, false))
             		.getFormatURIFromFFProbeOutput(FFProbeOutput);
 
             // Via DOMS Central, get PID of DOMS file-object which corresponds

@@ -33,11 +33,13 @@ public class FFProbeParser {
 
 	private final String allowedFormatName;
 	private final String formaturi;
+	private final boolean appendCodecsToFormatUri;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-	public FFProbeParser(String allowedFormatName, String formaturi) {
+	public FFProbeParser(String allowedFormatName, String formaturi, boolean appendCodecsToFormatUri) {
 		this.allowedFormatName = allowedFormatName;
 		this.formaturi = formaturi;
+		this.appendCodecsToFormatUri = appendCodecsToFormatUri;
 	}
 	
     public String getFormatURIFromFFProbeOutput(String FFProbeOutput)
@@ -86,20 +88,21 @@ public class FFProbeParser {
             throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" + 
             		format_name + "', required: '" + allowedFormatName +"'");
         }
-        //TODO FIXME find a fix for this
-/*
-        if (codecs.size() > 0){
-            format_uri= format_uri + ";codecs=\"";
-            for (int i = 0; i < codecs.size(); i++){
-                String codec = codecs.get(i);
-                format_uri = format_uri + codec;
-                if (i+1 != codecs.size()){
-                    format_uri = format_uri + ",";
+
+        if(appendCodecsToFormatUri) {
+        	if (codecs.size() > 0){
+                format_uri= format_uri + ";codecs=\"";
+                for (int i = 0; i < codecs.size(); i++){
+                    String codec = codecs.get(i);
+                    format_uri = format_uri + codec;
+                    if (i+1 != codecs.size()){
+                        format_uri = format_uri + ",";
+                    }
                 }
-            }
-            format_uri = format_uri + "\"";
+                format_uri = format_uri + "\"";
+            }	
         }
-*/
+        
         log.debug("allowedformat: '" + formaturi + "', actual format: '" + format_uri +"'");
         
         return format_uri;
