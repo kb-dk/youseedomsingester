@@ -20,15 +20,15 @@ import dk.statsbiblioteket.util.Files;
 /** Parse options */
 public abstract class DomsOptionParser {
     protected static final Option FILENAME_OPTION
-            = new Option("filename", true, "The sb filename of the media file");
+        = new Option("filename", true, "The sb filename of the media file");
     protected static final Option URL_OPTION
-            = new Option("url", true, "The permanent url to the file");
+        = new Option("url", true, "The permanent url to the file");
     protected static final Option FFPROBE_LOCATION_OPTION
-            = new Option("ffprobe", true, "The file containing the ffprobe profile in xml");
+        = new Option("ffprobe", true, "The file containing the ffprobe profile in xml");
     protected static final Option METADATA_LOCATION_OPTION
-            = new Option("metadata", true, "The file containing the bibliographic metadata in xml");
+        = new Option("metadata", true, "The file containing the bibliographic metadata in xml");
     protected static final Option CONFIG_OPTION
-            = new Option("config", true, "A property file with configuration");
+        = new Option("config", true, "A property file with configuration");
 
     protected static Options options;
 
@@ -38,13 +38,13 @@ public abstract class DomsOptionParser {
      * Get the context fitting for the option parser 
      */
     protected abstract IngestContext getContext();
-    
+
     protected abstract String getHelpText();
-    
+
     protected void parseSpecifics(CommandLine cmd) throws OptionParseException {
-    	return;
+        return;
     }
-    
+
     /**
      * Parse options. Options can be seen by running with no options.
      * On parse errors, will print error message on System.err, and return null.
@@ -62,7 +62,7 @@ public abstract class DomsOptionParser {
             cmd = parser.parse(options, args);
         } catch (ParseException e) {
             parseError(e.toString());
-            return null;
+            throw new OptionParseException(e.getMessage(), e);
         }
 
         parseFilename(cmd);
@@ -73,7 +73,7 @@ public abstract class DomsOptionParser {
         parseSpecifics(cmd);
 
         log.debug("Read parameters for '{}'. Context: '{}'",
-        		getContext().getFilename(), getContext());
+                getContext().getFilename(), getContext());
         return getContext();
     }
 
@@ -83,20 +83,20 @@ public abstract class DomsOptionParser {
             parseError(FILENAME_OPTION.toString());
             throw new OptionParseException(FILENAME_OPTION.toString());
         } else {
-        	getContext().setFilename(filename);
+            getContext().setFilename(filename);
         }
     }
-    
+
     protected void parseURL(CommandLine cmd) throws OptionParseException {
         String url = cmd.getOptionValue(URL_OPTION.getOpt());
         if (url == null) {
             parseError(URL_OPTION.toString());
             throw new OptionParseException(URL_OPTION.toString());
         } else {
-        	getContext().setRemoteURL(url);
+            getContext().setRemoteURL(url);
         }
     }
-    
+
     protected void parseFFprobe(CommandLine cmd) throws OptionParseException {
         String ffprobeLocation = cmd.getOptionValue(FFPROBE_LOCATION_OPTION.getOpt());
         if (ffprobeLocation == null) {
@@ -110,21 +110,21 @@ public abstract class DomsOptionParser {
             parseError(e.toString());
         }
     }
-    
+
     protected void parseMetadata(CommandLine cmd) throws OptionParseException {
         String metadataLocation = cmd.getOptionValue(METADATA_LOCATION_OPTION.getOpt());
         if (metadataLocation == null) {
-        	parseError(METADATA_LOCATION_OPTION.toString());
-        	throw new OptionParseException(METADATA_LOCATION_OPTION.toString());
+            parseError(METADATA_LOCATION_OPTION.toString());
+            throw new OptionParseException(METADATA_LOCATION_OPTION.toString());
         }
         try {
-        	String metadataContents = Files.loadString(new File(metadataLocation));
-        	getContext().setMetadataContents(metadataContents);
+            String metadataContents = Files.loadString(new File(metadataLocation));
+            getContext().setMetadataContents(metadataContents);
         } catch (IOException e) {
-        	parseError(e.toString());
+            parseError(e.toString());
         }
     }
-    
+
     protected void parseConfig(CommandLine cmd) throws OptionParseException {
         String configFile = cmd.getOptionValue(CONFIG_OPTION.getOpt());
         if (configFile != null) {
@@ -138,7 +138,7 @@ public abstract class DomsOptionParser {
             }
         }
     }
-    
+
     protected void printUsage() {
         final HelpFormatter usageFormatter = new HelpFormatter();
         usageFormatter.printHelp(getHelpText(), options, true);

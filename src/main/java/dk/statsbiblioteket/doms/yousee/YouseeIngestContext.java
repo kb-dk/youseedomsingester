@@ -16,10 +16,6 @@ public class YouseeIngestContext implements IngestContext {
     private String filename;
     private Properties config;
 
-/*    public YouseeIngestContext(String filename) {
-        this.filename = filename;
-    }*/
-
     public String getRemoteURL() {
         return remoteURL;
     }

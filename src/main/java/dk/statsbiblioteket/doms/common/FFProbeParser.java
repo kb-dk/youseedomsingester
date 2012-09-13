@@ -1,47 +1,44 @@
 package dk.statsbiblioteket.doms.common;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import dk.statsbiblioteket.doms.vhs.VHSIngesterCLI;
-
 import java.io.ByteArrayInputStream;
-import javax.xml.namespace.NamespaceContext;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPathConstants;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
+ * Class to parse FFprobe output xml files. 
  */
 public class FFProbeParser {
 
-	private final String allowedFormatName;
-	private final String formaturi;
-	private final boolean appendCodecsToFormatUri;
+    private final String allowedFormatName;
+    private final String formaturi;
+    private final boolean appendCodecsToFormatUri;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-	public FFProbeParser(String allowedFormatName, String formaturi, boolean appendCodecsToFormatUri) {
-		this.allowedFormatName = allowedFormatName;
-		this.formaturi = formaturi;
-		this.appendCodecsToFormatUri = appendCodecsToFormatUri;
-	}
-	
+    public FFProbeParser(String allowedFormatName, String formaturi, boolean appendCodecsToFormatUri) {
+        this.allowedFormatName = allowedFormatName;
+        this.formaturi = formaturi;
+        this.appendCodecsToFormatUri = appendCodecsToFormatUri;
+    }
+
     public String getFormatURIFromFFProbeOutput(String FFProbeOutput)
             throws XPathExpressionException, ParserConfigurationException,
             IOException, SAXException {
@@ -70,7 +67,7 @@ public class FFProbeParser {
         xpath = xPathfactory.newXPath();
         expr = xpath.compile("ffprobe/streams/stream/@codec_name");
         NodeList codecsNodeList
-                = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+        = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
         Set<String> codecSet = new HashSet<String>();
         // Convert nodelist to a set of strings, to remove duplicates
         for(int i = 0; i < codecsNodeList.getLength(); i++) {
@@ -86,11 +83,11 @@ public class FFProbeParser {
             format_uri = formaturi;
         } else {
             throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" + 
-            		format_name + "', required: '" + allowedFormatName +"'");
+                    format_name + "', required: '" + allowedFormatName +"'");
         }
 
         if(appendCodecsToFormatUri) {
-        	if (codecs.size() > 0){
+            if (codecs.size() > 0){
                 format_uri= format_uri + ";codecs=\"";
                 for (int i = 0; i < codecs.size(); i++){
                     String codec = codecs.get(i);
@@ -102,9 +99,9 @@ public class FFProbeParser {
                 format_uri = format_uri + "\"";
             }	
         }
-        
+
         log.debug("allowedformat: '" + formaturi + "', actual format: '" + format_uri +"'");
-        
+
         return format_uri;
     }
 }

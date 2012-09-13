@@ -15,7 +15,7 @@ public class YouseeIngesterFactory extends IngesterFactory {
      * @param config The configuration.
      */
     public YouseeIngesterFactory(Properties config) {
-    	super(config);
+        super(config);
     }
 
     /**

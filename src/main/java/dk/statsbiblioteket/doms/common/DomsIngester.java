@@ -17,10 +17,10 @@ import java.util.Properties;
 
 /** Ingester for Doms. */
 public abstract class DomsIngester implements Ingester {
-	protected static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
-	protected static final String ALLOWED_FORMAT_NAME_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
-	protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
-	
+    protected static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
+    protected static final String ALLOWED_FORMAT_NAME_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
+    protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
+
     protected final DocumentBuilder db;
     protected final CentralWebservice centralWebservice;
     protected final Properties config;
@@ -34,7 +34,7 @@ public abstract class DomsIngester implements Ingester {
     protected DocumentBuilder getDocumentBuilder() {
         try {
             DocumentBuilderFactory documentBuilderFactory
-                    = DocumentBuilderFactory.newInstance();
+            = DocumentBuilderFactory.newInstance();
             documentBuilderFactory.setNamespaceAware(true);
             documentBuilderFactory.setCoalescing(true);
             documentBuilderFactory.setIgnoringElementContentWhitespace(true);
@@ -54,21 +54,21 @@ public abstract class DomsIngester implements Ingester {
      */
     @Override
     public abstract String ingest(IngestContext context);
-    
-    
-    
+
+
+
     protected void setDatastreamContents(CentralWebservice webservice,
-                                       String objectWithURL,
-                                       String datastreamName,
-                                       String datastreamContents,
-                                       String message)
-            throws InvalidCredentialsException, InvalidResourceException,
-            MethodFailedException {
+            String objectWithURL,
+            String datastreamName,
+            String datastreamContents,
+            String message)
+                    throws InvalidCredentialsException, InvalidResourceException,
+                    MethodFailedException {
         String datastreamContentsOrig = "";
         boolean update = false;
         try {
             datastreamContentsOrig
-                    = webservice.getDatastreamContents(objectWithURL,
+            = webservice.getDatastreamContents(objectWithURL,
                     datastreamName);
             update = !xmlEquals(datastreamContentsOrig, datastreamContents);
         } catch (InvalidResourceException e) {

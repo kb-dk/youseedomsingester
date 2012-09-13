@@ -18,14 +18,14 @@ public abstract class IngesterFactory {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private static final String DEFAULT_FEDORA_WEBSERVICE_URL 
-    			= "http://localhost:7880/centralWebservice-service/central/?wsdl";
+        = "http://localhost:7880/centralWebservice-service/central/?wsdl";
     private CentralWebservice centralWebservice;
     private static final String FEDORA_USERNAME_PROPERTY 
-    			= "dk.statsbiblioteket.doms.common.fedorausername";
+        = "dk.statsbiblioteket.doms.common.fedorausername";
     private static final String FEDORA_PASSWORD_PROPERTY 
-    			= "dk.statsbiblioteket.doms.common.fedorapassword";
+        = "dk.statsbiblioteket.doms.common.fedorapassword";
     private static final String FEDORA_WEBSERVICE_URL_PROPERTY 
-    			= "dk.statsbiblioteket.doms.common.fedorawebserviceurl";
+        = "dk.statsbiblioteket.doms.common.fedorawebserviceurl";
     private static final String DEFAULT_FEDORA_USERNAME = "fedoraAdmin";
     private static final String DEFAULT_FEDORA_PASSWORD = "fedoraAdminPass";
     protected final Properties config;
@@ -36,7 +36,7 @@ public abstract class IngesterFactory {
      * @param config The configuration.
      */
     public IngesterFactory(Properties config) {
-    	if (config == null) {
+        if (config == null) {
             this.config = new Properties(System.getProperties());
         } else {
             this.config = config;
@@ -61,13 +61,13 @@ public abstract class IngesterFactory {
                 CentralWebservice webservice = new CentralWebserviceService(
                         new URL(config.getProperty(FEDORA_WEBSERVICE_URL_PROPERTY,
                                 DEFAULT_FEDORA_WEBSERVICE_URL)),
-                        new QName("http://central.doms.statsbiblioteket.dk/", "CentralWebserviceService"))
-                        .getCentralWebservicePort();
+                                new QName("http://central.doms.statsbiblioteket.dk/", "CentralWebserviceService"))
+                .getCentralWebservicePort();
                 Map<String, Object> domsAPILogin = ((BindingProvider) webservice).getRequestContext();
                 domsAPILogin.put(BindingProvider.USERNAME_PROPERTY,
-                                 config.getProperty(FEDORA_USERNAME_PROPERTY, DEFAULT_FEDORA_USERNAME));
+                        config.getProperty(FEDORA_USERNAME_PROPERTY, DEFAULT_FEDORA_USERNAME));
                 domsAPILogin.put(BindingProvider.PASSWORD_PROPERTY,
-                                 config.getProperty(FEDORA_PASSWORD_PROPERTY, DEFAULT_FEDORA_PASSWORD));
+                        config.getProperty(FEDORA_PASSWORD_PROPERTY, DEFAULT_FEDORA_PASSWORD));
                 centralWebservice = webservice;
             }
             return centralWebservice;

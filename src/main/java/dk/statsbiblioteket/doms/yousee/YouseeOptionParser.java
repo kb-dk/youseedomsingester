@@ -17,56 +17,55 @@ import dk.statsbiblioteket.util.Files;
 
 /** Parse options */
 public class YouseeOptionParser extends DomsOptionParser {
-	private YouseeIngestContext context;
+    private YouseeIngestContext context;
     private static final Option CROSSCHECK_LOCATION_OPTION
-            = new Option("crosscheck", true, "The file containing the crosscheck profile in xml");
+    = new Option("crosscheck", true, "The file containing the crosscheck xml-profile");
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     public YouseeOptionParser() {
-    	options = new Options();
-    	options.addOption(DomsOptionParser.FILENAME_OPTION);
+        options = new Options();
+        options.addOption(DomsOptionParser.FILENAME_OPTION);
         options.addOption(DomsOptionParser.URL_OPTION);
         options.addOption(DomsOptionParser.FFPROBE_LOCATION_OPTION);
         options.addOption(YouseeOptionParser.CROSSCHECK_LOCATION_OPTION);
         options.addOption(VHSOptionParser.METADATA_LOCATION_OPTION);
         for (Object option : options.getOptions()) {
             if (option instanceof Option) {
-                Option option1 = (Option) option;
-                option1.setRequired(true);
+                ((Option) option).setRequired(true);
             }
         }
         options.addOption(DomsOptionParser.CONFIG_OPTION);
     }
-    
+
     @Override
     protected void parseSpecifics(CommandLine cmd) throws OptionParseException {
-    	String crosscheckLocation = cmd.getOptionValue(CROSSCHECK_LOCATION_OPTION.getOpt());
-    	if (crosscheckLocation == null) {
-    		parseError(CROSSCHECK_LOCATION_OPTION.toString());
-    		throw new OptionParseException(CROSSCHECK_LOCATION_OPTION.toString());
-    	}
-    	try {
-    		String crosscheckContents = Files.loadString(new File(crosscheckLocation));
-    		YouseeIngestContext context = (YouseeIngestContext) getContext();
-	    	context.setCrosscheckContents(crosscheckContents);
-    	} catch (IOException e) {
-    		parseError(e.toString());
-    		throw new OptionParseException(e.toString());
-    	}    
+        String crosscheckLocation = cmd.getOptionValue(CROSSCHECK_LOCATION_OPTION.getOpt());
+        if (crosscheckLocation == null) {
+            parseError(CROSSCHECK_LOCATION_OPTION.toString());
+            throw new OptionParseException(CROSSCHECK_LOCATION_OPTION.toString());
+        }
+        try {
+            String crosscheckContents = Files.loadString(new File(crosscheckLocation));
+            YouseeIngestContext context = (YouseeIngestContext) getContext();
+            context.setCrosscheckContents(crosscheckContents);
+        } catch (IOException e) {
+            parseError(e.toString());
+            throw new OptionParseException(e.toString());
+        }    
     }
 
 
-	@Override
-	protected synchronized IngestContext getContext() {
-		if(context == null) {
-			context = new YouseeIngestContext();
-		}
-		return context;
-	}
+    @Override
+    protected synchronized IngestContext getContext() {
+        if(context == null) {
+            context = new YouseeIngestContext();
+        }
+        return context;
+    }
 
-	@Override
-	protected String getHelpText() {
-		return "youseeDomsIngester";
-	}
+    @Override
+    protected String getHelpText() {
+        return "youseeDomsIngester";
+    }
 }

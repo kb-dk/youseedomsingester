@@ -14,7 +14,7 @@ public class YouseeDomsIngester extends DomsIngester {
 
 
     public YouseeDomsIngester(Properties config, CentralWebservice webservice) {
-    	super(config, webservice);
+        super(config, webservice);
     }
 
     /**
@@ -26,15 +26,15 @@ public class YouseeDomsIngester extends DomsIngester {
      */
     @Override
     public String ingest(IngestContext context) {
-    	YouseeIngestContext youseeContext;
-    	if(!(context instanceof YouseeIngestContext)) {
-    		throw new IllegalStateException("IngestContext context is not of type YouseeIngestContext");
-    	} else {
-    		youseeContext = (YouseeIngestContext) context;
-    	}
+        YouseeIngestContext youseeContext;
+        if(!(context instanceof YouseeIngestContext)) {
+            throw new IllegalStateException("IngestContext context is not of type YouseeIngestContext");
+        } else {
+            youseeContext = (YouseeIngestContext) context;
+        }
         // Template object to clone to get new objects, get from properties file
         String template = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_RadioTVFile"); 
-        
+
         // Get FFProbe output from context
         String FFProbeOutput = youseeContext.getFfprobeContents();
         //String formatUri = config.getProperty(
@@ -51,13 +51,13 @@ public class YouseeDomsIngester extends DomsIngester {
             String PIDOfObjectWithURL;
 
             PIDOfObjectWithURL = centralWebservice.getFileObjectWithURL(
-            		youseeContext.getRemoteURL());
+                    youseeContext.getRemoteURL());
             if (PIDOfObjectWithURL == null) {
                 // If not found, clone template (config)
                 PIDOfObjectWithURL = centralWebservice.newObject(template, null,
                         message);
                 centralWebservice.addFileFromPermanentURL(PIDOfObjectWithURL,
-                		youseeContext.getFilename(), null, youseeContext.getRemoteURL(),
+                        youseeContext.getFilename(), null, youseeContext.getRemoteURL(),
                         formatUri, message);
             }
 

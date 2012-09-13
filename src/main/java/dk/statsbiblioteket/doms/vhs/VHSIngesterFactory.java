@@ -16,7 +16,7 @@ public class VHSIngesterFactory extends IngesterFactory {
      * @param config The configuration.
      */
     public VHSIngesterFactory(Properties config) {
-    	super(config);
+        super(config);
     }
 
     /**

@@ -20,12 +20,12 @@ public class YouseeIngesterCLI {
      */
     public static void main(String[] args) {
         IngestContext context;
-		try {
-			context = new YouseeOptionParser().parseOptions(args);
-		} catch (OptionParseException e1) {
+        try {
+            context = new YouseeOptionParser().parseOptions(args);
+        } catch (OptionParseException e1) {
             System.exit(1);
             return;
-		}
+        }
 
         String uuid;
         try {

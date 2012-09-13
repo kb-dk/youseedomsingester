@@ -15,94 +15,90 @@ public class VHSIngestContext implements IngestContext {
     private String filename;
     private Properties config;
 
-    /*public VHSIngestContext(String filename) {
-        this.filename = filename;
-    }*/
-
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getRemoteURL()
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getRemoteURL()
+     */
     @Override
-	public String getRemoteURL() {
+    public String getRemoteURL() {
         return remoteURL;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setRemoteURL(java.lang.String)
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setRemoteURL(java.lang.String)
+     */
     @Override
-	public void setRemoteURL(String remoteURL) {
+    public void setRemoteURL(String remoteURL) {
         this.remoteURL = remoteURL;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getFfprobeContents()
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getFfprobeContents()
+     */
     @Override
-	public String getFfprobeContents() {
+    public String getFfprobeContents() {
         return ffprobeContents;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setFfprobeContents(java.lang.String)
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setFfprobeContents(java.lang.String)
+     */
     @Override
-	public void setFfprobeContents(String ffprobeContents) {
+    public void setFfprobeContents(String ffprobeContents) {
         this.ffprobeContents = ffprobeContents;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getVHSMetadataContents()
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getVHSMetadataContents()
+     */
     @Override
-	public String getMetadataContents() {
+    public String getMetadataContents() {
         return VHSMetadataContents;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setVHSMetadataContents(java.lang.String)
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setVHSMetadataContents(java.lang.String)
+     */
     @Override
-	public void setMetadataContents(String metadataContents) {
+    public void setMetadataContents(String metadataContents) {
         this.VHSMetadataContents = metadataContents;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getFilename()
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getFilename()
+     */
     @Override
-	public String getFilename() {
+    public String getFilename() {
         return filename;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setFilename(java.lang.String)
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setFilename(java.lang.String)
+     */
     @Override
-	public void setFilename(String filename) {
+    public void setFilename(String filename) {
         this.filename = filename;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getConfig()
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getConfig()
+     */
     @Override
-	public Properties getConfig() {
+    public Properties getConfig() {
         return config;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setConfig(java.util.Properties)
-	 */
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#setConfig(java.util.Properties)
+     */
     @Override
-	public void setConfig(Properties config) {
+    public void setConfig(Properties config) {
         this.config = config;
     }
 
     /* (non-Javadoc)
-	 * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#toString()
-	 */
-	@Override
+     * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#toString()
+     */
+    @Override
     public String toString() {
         return "IngestContext{"
                 + "remoteURL='" + remoteURL + '\''
