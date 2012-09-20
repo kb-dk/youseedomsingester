@@ -97,4 +97,26 @@ public class YouseeIngestContext implements IngestContext {
                 + ", configFile='" + config + '\''
                 + '}';
     }
+
+    @Override
+    public String getTemplatePid() {
+        return null;
+    }
+
+    @Override
+    public void setTemplatePid(String templatePid) {
+        throw new IllegalAccessError("not implemented");
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String getWSDLlocation() {
+       return null;
+
+    }
+
+    @Override
+    public void setWSDLlocation(String wsdlLocation) {
+        throw new IllegalAccessError("not implemented");
+    }
 }
