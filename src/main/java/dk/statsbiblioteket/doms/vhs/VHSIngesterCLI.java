@@ -30,7 +30,7 @@ public class VHSIngesterCLI {
 
         String uuid;
         try {
-            uuid = new VHSIngesterFactory(context.getConfig()).getIngester().ingest(context);
+            uuid = new VHSIngesterFactory((VHSIngestContext) context).getIngester().ingest(context);
         } catch (Exception e) {
             System.err.println("Unable to ingest '" + context.getFilename()
                     + "' into doms: " + e);

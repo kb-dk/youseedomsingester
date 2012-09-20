@@ -26,6 +26,8 @@ public class VHSOptionParser extends DomsOptionParser {
             }
         }
         options.addOption(DomsOptionParser.CONFIG_OPTION);
+        options.addOption(DomsOptionParser.USERNAME_OPTION);
+        options.addOption(DomsOptionParser.PASSWORD_OPTION);
     }
 
     @Override

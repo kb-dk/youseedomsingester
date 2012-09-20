@@ -29,7 +29,11 @@ public abstract class DomsOptionParser {
         = new Option("metadata", true, "The file containing the bibliographic metadata in xml");
     protected static final Option CONFIG_OPTION
         = new Option("config", true, "A property file with configuration");
-
+    protected static final Option USERNAME_OPTION 
+        = new Option("user", true, "The username for the DOMS server");
+    protected static final Option PASSWORD_OPTION 
+        = new Option("pass", true, "The password for the DOMS server");
+    
     protected static Options options;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -43,6 +47,18 @@ public abstract class DomsOptionParser {
 
     protected void parseSpecifics(CommandLine cmd) throws OptionParseException {
         return;
+    }
+    
+    /**
+     * Method to verify that options are 'sane'. 
+     * Default implementation checks that if username is supplied, password should also be supplied. 
+     */
+    protected void checkOptions() {
+        if(getContext().getUsername() != null) {
+            if(getContext().getPassword() == null) {
+                throw new RuntimeException("Username was supplied, but no password. Can't continue.");
+            }
+        }
     }
 
     /**
@@ -70,8 +86,11 @@ public abstract class DomsOptionParser {
         parseFFprobe(cmd);
         parseMetadata(cmd);
         parseConfig(cmd);
+        parseUsername(cmd);
+        parsePassword(cmd);
         parseSpecifics(cmd);
-
+        checkOptions();
+        
         log.debug("Read parameters for '{}'. Context: '{}'",
                 getContext().getFilename(), getContext());
         return getContext();
@@ -136,6 +155,20 @@ public abstract class DomsOptionParser {
                 parseError(e.toString());
                 throw new OptionParseException(e.toString());
             }
+        }
+    }
+    
+    protected void parseUsername(CommandLine cmd) {
+        String username = cmd.getOptionValue(USERNAME_OPTION.getOpt());
+        if (username != null) {
+            getContext().setUsername(username);
+        }
+    }
+    
+    protected void parsePassword(CommandLine cmd){
+        String password = cmd.getOptionValue(PASSWORD_OPTION.getOpt());
+        if (password != null) {
+            getContext().setPassword(password);
         }
     }
 

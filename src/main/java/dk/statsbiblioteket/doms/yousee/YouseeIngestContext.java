@@ -14,6 +14,8 @@ public class YouseeIngestContext implements IngestContext {
     // Checksum is assumed to be part of received metadata.
     private String youseeMetadataContents;
     private String filename;
+    private String username;
+    private String password;
     private Properties config;
 
     public String getRemoteURL() {
@@ -62,6 +64,26 @@ public class YouseeIngestContext implements IngestContext {
 
     public void setConfig(Properties config) {
         this.config = config;
+    }
+    
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

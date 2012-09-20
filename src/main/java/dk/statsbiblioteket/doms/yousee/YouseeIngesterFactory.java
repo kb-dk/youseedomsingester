@@ -3,19 +3,19 @@ package dk.statsbiblioteket.doms.yousee;
 import dk.statsbiblioteket.doms.common.Ingester;
 import dk.statsbiblioteket.doms.common.IngesterFactory;
 
-import java.util.Properties;
-
 /** Create the object instances for doms ingester. */
 public class YouseeIngesterFactory extends IngesterFactory {
     private Ingester ingester;
+    private YouseeIngestContext context;
 
     /**
      * Initialise factory with given configuration.
      *
      * @param config The configuration.
      */
-    public YouseeIngesterFactory(Properties config) {
-        super(config);
+    public YouseeIngesterFactory(YouseeIngestContext context) {
+        super(context.getConfig());
+        this.context = context;
     }
 
     /**
@@ -25,7 +25,7 @@ public class YouseeIngesterFactory extends IngesterFactory {
      */
     public synchronized Ingester getIngester() {
         if (ingester == null) {
-            ingester = new YouseeDomsIngester(config, getWebservice());
+            ingester = new YouseeDomsIngester(config, getWebservice(context));
         }
         return ingester;
     }

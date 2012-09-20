@@ -55,7 +55,17 @@ public abstract class IngesterFactory {
      *
      * @return A client to the DOMS Central webservice.
      */
-    protected synchronized CentralWebservice getWebservice() {
+    protected synchronized CentralWebservice getWebservice(IngestContext context) {
+        String username, password;
+        
+        if(context.getUsername() != null) {
+            username = context.getUsername();
+            password = context.getPassword();
+        } else {
+            username =  config.getProperty(FEDORA_USERNAME_PROPERTY, DEFAULT_FEDORA_USERNAME);
+            password = config.getProperty(FEDORA_PASSWORD_PROPERTY, DEFAULT_FEDORA_PASSWORD);
+        }
+            
         try {
             if (centralWebservice == null) {
                 CentralWebservice webservice = new CentralWebserviceService(
@@ -64,10 +74,8 @@ public abstract class IngesterFactory {
                                 new QName("http://central.doms.statsbiblioteket.dk/", "CentralWebserviceService"))
                 .getCentralWebservicePort();
                 Map<String, Object> domsAPILogin = ((BindingProvider) webservice).getRequestContext();
-                domsAPILogin.put(BindingProvider.USERNAME_PROPERTY,
-                        config.getProperty(FEDORA_USERNAME_PROPERTY, DEFAULT_FEDORA_USERNAME));
-                domsAPILogin.put(BindingProvider.PASSWORD_PROPERTY,
-                        config.getProperty(FEDORA_PASSWORD_PROPERTY, DEFAULT_FEDORA_PASSWORD));
+                domsAPILogin.put(BindingProvider.USERNAME_PROPERTY, username);
+                domsAPILogin.put(BindingProvider.PASSWORD_PROPERTY, password);
                 centralWebservice = webservice;
             }
             return centralWebservice;

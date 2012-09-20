@@ -14,6 +14,8 @@ public class VHSIngestContext implements IngestContext {
     private String VHSMetadataContents;
     private String filename;
     private Properties config;
+    private String username;
+    private String password;
 
     /* (non-Javadoc)
      * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getRemoteURL()
@@ -107,5 +109,25 @@ public class VHSIngestContext implements IngestContext {
                 + ", filename='" + filename + '\''
                 + ", configFile='" + config + '\''
                 + '}';
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

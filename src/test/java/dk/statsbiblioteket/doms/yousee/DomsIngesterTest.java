@@ -79,7 +79,7 @@ public class DomsIngesterTest {
         };
 
         // Create an ingest context to test with
-        IngestContext context = new YouseeOptionParser().parseOptions(args);
+        YouseeIngestContext context = (YouseeIngestContext) new YouseeOptionParser().parseOptions(args);
         if (context == null) {
             //System.exit(1);
             //return;
@@ -89,7 +89,7 @@ public class DomsIngesterTest {
         String uuid = "";
 
             Properties config = context.getConfig();
-            uuid = new YouseeIngesterFactory(context.getConfig()).getIngester().ingest(context);
+            uuid = new YouseeIngesterFactory(context).getIngester().ingest(context);
 
 
         //System.out.println("{\"domsPid\" : \"" + uuid + "\"}");

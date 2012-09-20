@@ -19,9 +19,9 @@ public class YouseeIngesterCLI {
      * @param args Options. Run with no parameters to get usage.
      */
     public static void main(String[] args) {
-        IngestContext context;
+        YouseeIngestContext context;
         try {
-            context = new YouseeOptionParser().parseOptions(args);
+            context = (YouseeIngestContext) new YouseeOptionParser().parseOptions(args);
         } catch (OptionParseException e1) {
             System.exit(1);
             return;
@@ -29,7 +29,7 @@ public class YouseeIngesterCLI {
 
         String uuid;
         try {
-            uuid = new YouseeIngesterFactory(context.getConfig()).getIngester().ingest(context);
+            uuid = new YouseeIngesterFactory(context).getIngester().ingest(context);
         } catch (Exception e) {
             System.err.println("Unable to ingest '" + context.getFilename()
                     + "' into doms: " + e);

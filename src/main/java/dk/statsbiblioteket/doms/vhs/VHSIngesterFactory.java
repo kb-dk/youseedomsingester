@@ -4,19 +4,19 @@ import dk.statsbiblioteket.doms.common.Ingester;
 import dk.statsbiblioteket.doms.common.IngesterFactory;
 import dk.statsbiblioteket.doms.vhs.VHSDomsIngester;
 
-import java.util.Properties;
-
 /** Create the object instances for doms ingester. */
 public class VHSIngesterFactory extends IngesterFactory {
     private Ingester ingester;
+    private VHSIngestContext context;
 
     /**
      * Initialise factory with given configuration.
      *
      * @param config The configuration.
      */
-    public VHSIngesterFactory(Properties config) {
-        super(config);
+    public VHSIngesterFactory(VHSIngestContext context) {
+        super(context.getConfig());
+        this.context = context;
     }
 
     /**
@@ -26,7 +26,7 @@ public class VHSIngesterFactory extends IngesterFactory {
      */
     public synchronized Ingester getIngester() {
         if (ingester == null) {
-            ingester = new VHSDomsIngester(config, getWebservice());
+            ingester = new VHSDomsIngester(config, getWebservice(context));
         }
         return ingester;
     }
