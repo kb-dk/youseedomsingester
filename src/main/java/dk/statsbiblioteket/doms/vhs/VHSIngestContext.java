@@ -16,6 +16,8 @@ public class VHSIngestContext implements IngestContext {
     private Properties config;
     private String username;
     private String password;
+    private String templatePid;
+    private String WSDLlocation;
 
     /* (non-Javadoc)
      * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getRemoteURL()
@@ -111,6 +113,7 @@ public class VHSIngestContext implements IngestContext {
                 + '}';
     }
 
+
     @Override
     public String getUsername() {
         return username;
@@ -129,5 +132,21 @@ public class VHSIngestContext implements IngestContext {
     @Override
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTemplatePid() {
+        return templatePid;
+    }
+
+    public void setTemplatePid(String templatePid) {
+        this.templatePid = templatePid;
+    }
+
+    public String getWSDLlocation() {
+        return WSDLlocation;
+    }
+
+    public void setWSDLlocation(String WSDLlocation) {
+        this.WSDLlocation = WSDLlocation;
     }
 }

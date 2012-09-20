@@ -34,4 +34,12 @@ public interface IngestContext {
     
     public abstract String toString();
 
+    public abstract String getTemplatePid();
+
+    public abstract void setTemplatePid(String templatePid);
+
+    public abstract String getWSDLlocation();
+
+    public abstract void setWSDLlocation(String wsdlLocation);
+
 }

@@ -34,9 +34,13 @@ public class VHSDomsIngester extends DomsIngester {
         } else {
             vhsContext = (VHSIngestContext) context;
         }
-        // Template object to clone to get new objects, get from properties file
-        String template = config.getProperty(TEMPLATE_PROPERTY,
-                "doms:Template_VHSFile"); // 2nd arg is default value
+        // Template object to clone to get new objects, get from properties file or command line
+        String template = context.getTemplatePid();
+        if (template == null){
+            template = config.getProperty(TEMPLATE_PROPERTY,
+                            "doms:Template_VHSFile"); // 2nd arg is default value
+        }
+
 
         String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY, "mpeg");
         String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");

@@ -28,6 +28,9 @@ public class VHSOptionParser extends DomsOptionParser {
         options.addOption(DomsOptionParser.CONFIG_OPTION);
         options.addOption(DomsOptionParser.USERNAME_OPTION);
         options.addOption(DomsOptionParser.PASSWORD_OPTION);
+        options.addOption(DomsOptionParser.TEMPLATE_OPTION);
+        options.addOption(DomsOptionParser.WSDL_OPTION);
+
     }
 
     @Override
@@ -35,7 +38,7 @@ public class VHSOptionParser extends DomsOptionParser {
         if(context == null) {
             context = new VHSIngestContext();
         }
-        return context; 
+        return context;
     }
 
     @Override

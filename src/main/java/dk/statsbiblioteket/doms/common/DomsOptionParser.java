@@ -33,7 +33,13 @@ public abstract class DomsOptionParser {
         = new Option("user", true, "The username for the DOMS server");
     protected static final Option PASSWORD_OPTION 
         = new Option("pass", true, "The password for the DOMS server");
-    
+
+    protected static final Option TEMPLATE_OPTION
+        = new Option("template", true, "The pid of template object");
+    protected static final Option WSDL_OPTION
+        = new Option("wsdl", true, "The wsdl address of the doms server");
+
+
     protected static Options options;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -88,12 +94,29 @@ public abstract class DomsOptionParser {
         parseConfig(cmd);
         parseUsername(cmd);
         parsePassword(cmd);
+        parseTemplate(cmd);
+        parseWSDL(cmd);
+
         parseSpecifics(cmd);
         checkOptions();
         
         log.debug("Read parameters for '{}'. Context: '{}'",
                 getContext().getFilename(), getContext());
         return getContext();
+    }
+
+    private void parseWSDL(CommandLine cmd) {
+        String username = cmd.getOptionValue(WSDL_OPTION.getOpt());
+        if (username != null) {
+            getContext().setWSDLlocation(username);
+        }
+    }
+
+    private void parseTemplate(CommandLine cmd) {
+        String username = cmd.getOptionValue(TEMPLATE_OPTION.getOpt());
+        if (username != null) {
+            getContext().setTemplatePid(username);
+        }
     }
 
     protected void parseFilename(CommandLine cmd) throws OptionParseException {
