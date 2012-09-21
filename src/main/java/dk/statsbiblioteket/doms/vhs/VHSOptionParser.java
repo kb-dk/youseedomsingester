@@ -30,6 +30,7 @@ public class VHSOptionParser extends DomsOptionParser {
         options.addOption(DomsOptionParser.PASSWORD_OPTION);
         options.addOption(DomsOptionParser.TEMPLATE_OPTION);
         options.addOption(DomsOptionParser.WSDL_OPTION);
+        options.addOption(DomsOptionParser.PROGRAM_PID_OPTION);
 
     }
 

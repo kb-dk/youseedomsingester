@@ -18,6 +18,8 @@ public class VHSIngestContext implements IngestContext {
     private String password;
     private String templatePid;
     private String WSDLlocation;
+    private String programPid;
+
 
     /* (non-Javadoc)
      * @see dk.statsbiblioteket.doms.vhs.IngestContextIface#getRemoteURL()
@@ -148,5 +150,13 @@ public class VHSIngestContext implements IngestContext {
 
     public void setWSDLlocation(String WSDLlocation) {
         this.WSDLlocation = WSDLlocation;
+    }
+
+    public String getProgramPid() {
+        return programPid;
+    }
+
+    public void setProgramPid(String programPid) {
+        this.programPid = programPid;
     }
 }

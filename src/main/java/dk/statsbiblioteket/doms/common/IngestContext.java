@@ -42,4 +42,7 @@ public interface IngestContext {
 
     public abstract void setWSDLlocation(String wsdlLocation);
 
+    public abstract String getProgramPid();
+    public abstract void setProgramPid(String programPid);
+
 }

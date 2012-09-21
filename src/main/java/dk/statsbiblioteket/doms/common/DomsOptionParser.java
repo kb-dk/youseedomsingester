@@ -39,6 +39,9 @@ public abstract class DomsOptionParser {
     protected static final Option WSDL_OPTION
         = new Option("wsdl", true, "The wsdl address of the doms server");
 
+    protected static final Option PROGRAM_PID_OPTION
+        = new Option("programpid", true, "The program pid to link to this object");
+
 
     protected static Options options;
 
@@ -96,6 +99,8 @@ public abstract class DomsOptionParser {
         parsePassword(cmd);
         parseTemplate(cmd);
         parseWSDL(cmd);
+        parseProgramPid(cmd);
+
 
         parseSpecifics(cmd);
         checkOptions();
@@ -103,6 +108,13 @@ public abstract class DomsOptionParser {
         log.debug("Read parameters for '{}'. Context: '{}'",
                 getContext().getFilename(), getContext());
         return getContext();
+    }
+
+    private void parseProgramPid(CommandLine cmd) {
+        String username = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());
+        if (username != null) {
+            getContext().setProgramPid(username);
+        }
     }
 
     private void parseWSDL(CommandLine cmd) {

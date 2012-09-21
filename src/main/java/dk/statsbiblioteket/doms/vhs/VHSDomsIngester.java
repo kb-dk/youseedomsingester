@@ -3,6 +3,7 @@ package dk.statsbiblioteket.doms.vhs;
 import java.util.Arrays;
 import java.util.Properties;
 
+import dk.statsbiblioteket.doms.central.Relation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -85,6 +86,16 @@ public class VHSDomsIngester extends DomsIngester {
             centralWebservice.markPublishedObject(Arrays.asList(
                     PIDOfObjectWithURL), message);
 
+            if (context.getProgramPid()!= null){
+                centralWebservice.markInProgressObject(Arrays.asList(context.getProgramPid()),message);
+                Relation rel = new Relation();
+                rel.setLiteral(false);
+                rel.setPredicate("http://doms.statsbiblioteket.dk/relations/default/0/1/#hasFile");
+                rel.setObject(context.getProgramPid());
+                rel.setSubject(PIDOfObjectWithURL);
+                centralWebservice.addRelation(context.getProgramPid(),rel,message);
+                centralWebservice.markPublishedObject(Arrays.asList(context.getProgramPid()),message);
+            }
             return PIDOfObjectWithURL;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
