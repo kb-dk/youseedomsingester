@@ -1,4 +1,4 @@
-package dk.statsbiblioteket.doms.yousee;
+package dk.statsbiblioteket.doms.radiotv;
 
 import java.util.Arrays;
 import java.util.Properties;
@@ -9,11 +9,11 @@ import dk.statsbiblioteket.doms.common.FFProbeParser;
 import dk.statsbiblioteket.doms.common.IngestContext;
 
 /** Ingester for Doms. */
-public class YouseeDomsIngester extends DomsIngester {
+public class RadioTVDomsIngester extends DomsIngester {
     private static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
 
 
-    public YouseeDomsIngester(Properties config, CentralWebservice webservice) {
+    public RadioTVDomsIngester(Properties config, CentralWebservice webservice) {
         super(config, webservice);
     }
 
@@ -26,19 +26,19 @@ public class YouseeDomsIngester extends DomsIngester {
      */
     @Override
     public String ingest(IngestContext context) {
-        YouseeIngestContext youseeContext;
-        if(!(context instanceof YouseeIngestContext)) {
-            throw new IllegalStateException("IngestContext context is not of type YouseeIngestContext");
+        RadioTVIngestContext radioTVContext;
+        if(!(context instanceof RadioTVIngestContext)) {
+            throw new IllegalStateException("IngestContext context is not of type RadioTVIngestContext");
         } else {
-            youseeContext = (YouseeIngestContext) context;
+            radioTVContext = (RadioTVIngestContext) context;
         }
         // Template object to clone to get new objects, get from properties file
         String template = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_RadioTVFile"); 
 
         // Get FFProbe output from context
-        String FFProbeOutput = youseeContext.getFfprobeContents();
+        String FFProbeOutput = radioTVContext.getFfprobeContents();
         //String formatUri = config.getProperty(
-        //        "dk.statsbiblioteket.doms.yousee.formaturi",
+        //        "dk.statsbiblioteket.doms.radiotv.formaturi",
         //        "info:mime/video/MP2T;codecs=\"aac_latm,dvbsub,h264\"");
 
         try {
@@ -51,13 +51,13 @@ public class YouseeDomsIngester extends DomsIngester {
             String PIDOfObjectWithURL;
 
             PIDOfObjectWithURL = centralWebservice.getFileObjectWithURL(
-                    youseeContext.getRemoteURL());
+                    radioTVContext.getRemoteURL());
             if (PIDOfObjectWithURL == null) {
                 // If not found, clone template (config)
                 PIDOfObjectWithURL = centralWebservice.newObject(template, null,
                         message);
                 centralWebservice.addFileFromPermanentURL(PIDOfObjectWithURL,
-                        youseeContext.getFilename(), null, youseeContext.getRemoteURL(),
+                        radioTVContext.getFilename(), null, radioTVContext.getRemoteURL(),
                         formatUri, message);
             }
 
@@ -67,12 +67,12 @@ public class YouseeDomsIngester extends DomsIngester {
 
             // Update elements of object from context
             setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
-                    "FFPROBE", youseeContext.getFfprobeContents(), message);
+                    "FFPROBE", radioTVContext.getFfprobeContents(), message);
             setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
-                    "CROSSCHECK", youseeContext.getCrosscheckContents(), message);
+                    "CROSSCHECK", radioTVContext.getCrosscheckContents(), message);
             // Checksum is assumed to be part of received metadata.
             setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
-                    "BROADCAST_METADATA", youseeContext.getMetadataContents(),
+                    "BROADCAST_METADATA", radioTVContext.getMetadataContents(),
                     message);
             //TODO: Update content models with format uris, CROSSCHECK, METADATA
 

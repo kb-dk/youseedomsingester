@@ -1,4 +1,4 @@
-package dk.statsbiblioteket.doms.yousee;
+package dk.statsbiblioteket.doms.radiotv;
 
 /**
  * Created by IntelliJ IDEA.
@@ -7,14 +7,14 @@ package dk.statsbiblioteket.doms.yousee;
  * Time: 10:28 AM
  * To change this template use File | Settings | File Templates.
  */
-public class YouseeIngesterCLITest {
+public class RadioTVIngesterCLITest {
     @org.junit.Test
     public void testMain() throws Exception {
 
         /*
          *
          */
-        /*YouseeIngesterCLI.main(new String[]{
+        /*RadioTVIngesterCLI.main(new String[]{
                 "-filename","testfile.mux",
                 "-ffprobe","src/test/resources/ffprobeSample.xml",
                 "-metadata","src/test/resources/metadataSample.xml",

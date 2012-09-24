@@ -1,4 +1,4 @@
-package dk.statsbiblioteket.doms.yousee;
+package dk.statsbiblioteket.doms.radiotv;
 
 import dk.statsbiblioteket.doms.central.CentralWebservice;
 import dk.statsbiblioteket.doms.common.IngestContext;
@@ -27,11 +27,11 @@ public class DomsIngesterTest {
                 "-metadata", "src/test/resources/metadataSample.xml",
                 "-crosscheck", "src/test/resources/crosscheckSample.xml",
                 "-url", "http://localhost/testfile1.mux",
-                "-config", "src/test/resources/yousee-doms-ingester.properties"
+                "-config", "src/test/resources/radiotv-doms-ingester.properties"
         };
 
         // Create an ingest context to test with
-        IngestContext context = new YouseeOptionParser().parseOptions(args);
+        IngestContext context = new RadioTVOptionParser().parseOptions(args);
         if (context == null) {
             //System.exit(1);
             //return;
@@ -44,7 +44,7 @@ public class DomsIngesterTest {
 
             CentralWebservice centralWebservice = new MockDomsWebservice();
 
-            YouseeDomsIngester ingester = new YouseeDomsIngester(config, centralWebservice);
+            RadioTVDomsIngester ingester = new RadioTVDomsIngester(config, centralWebservice);
 
             uuid = ingester.ingest(context);
         } catch (Exception e) {
@@ -75,11 +75,11 @@ public class DomsIngesterTest {
                 "-metadata", "src/test/resources/metadataSample.xml",
                 "-crosscheck", "src/test/resources/crosscheckSample.xml",
                 "-url", "http://localhost/testfile1.mux",
-                "-config", "src/test/resources/yousee-doms-ingester.properties"
+                "-config", "src/test/resources/radiotv-doms-ingester.properties"
         };
 
         // Create an ingest context to test with
-        YouseeIngestContext context = (YouseeIngestContext) new YouseeOptionParser().parseOptions(args);
+        RadioTVIngestContext context = (RadioTVIngestContext) new RadioTVOptionParser().parseOptions(args);
         if (context == null) {
             //System.exit(1);
             //return;
@@ -89,7 +89,7 @@ public class DomsIngesterTest {
         String uuid = "";
 
             Properties config = context.getConfig();
-            uuid = new YouseeIngesterFactory(context).getIngester().ingest(context);
+            uuid = new RadioTVIngesterFactory(context).getIngester().ingest(context);
 
 
         //System.out.println("{\"domsPid\" : \"" + uuid + "\"}");
@@ -107,7 +107,7 @@ public class DomsIngesterTest {
         String ffprobeContents = Files.loadString(new File("src/test/resources/ffprobeSample.xml"));
         String ffprobeContentsDifferent = Files.loadString(new File("src/test/resources/ffprobeSample-different.xml"));
 
-        boolean equals = new YouseeDomsIngester(null, null).xmlEquals(ffprobeContents, ffprobeContentsDifferent);
+        boolean equals = new RadioTVDomsIngester(null, null).xmlEquals(ffprobeContents, ffprobeContentsDifferent);
         assertTrue(equals);
 
     }

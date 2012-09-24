@@ -1,4 +1,4 @@
-package dk.statsbiblioteket.doms.yousee;
+package dk.statsbiblioteket.doms.radiotv;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,23 +12,22 @@ import org.slf4j.LoggerFactory;
 import dk.statsbiblioteket.doms.common.DomsOptionParser;
 import dk.statsbiblioteket.doms.common.IngestContext;
 import dk.statsbiblioteket.doms.common.OptionParseException;
-import dk.statsbiblioteket.doms.vhs.VHSOptionParser;
 import dk.statsbiblioteket.util.Files;
 
 /** Parse options */
-public class YouseeOptionParser extends DomsOptionParser {
-    private YouseeIngestContext context;
+public class RadioTVOptionParser extends DomsOptionParser {
+    private RadioTVIngestContext context;
     private static final Option CROSSCHECK_LOCATION_OPTION
     = new Option("crosscheck", true, "The file containing the crosscheck xml-profile");
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public YouseeOptionParser() {
+    public RadioTVOptionParser() {
         options = new Options();
         options.addOption(DomsOptionParser.FILENAME_OPTION);
         options.addOption(DomsOptionParser.URL_OPTION);
         options.addOption(DomsOptionParser.FFPROBE_LOCATION_OPTION);
-        options.addOption(YouseeOptionParser.CROSSCHECK_LOCATION_OPTION);
+        options.addOption(RadioTVOptionParser.CROSSCHECK_LOCATION_OPTION);
         options.addOption(DomsOptionParser.METADATA_LOCATION_OPTION);
         for (Object option : options.getOptions()) {
             if (option instanceof Option) {
@@ -47,7 +46,7 @@ public class YouseeOptionParser extends DomsOptionParser {
         }
         try {
             String crosscheckContents = Files.loadString(new File(crosscheckLocation));
-            YouseeIngestContext context = (YouseeIngestContext) getContext();
+            RadioTVIngestContext context = (RadioTVIngestContext) getContext();
             context.setCrosscheckContents(crosscheckContents);
         } catch (IOException e) {
             parseError(e.toString());
@@ -59,7 +58,7 @@ public class YouseeOptionParser extends DomsOptionParser {
     @Override
     protected synchronized IngestContext getContext() {
         if(context == null) {
-            context = new YouseeIngestContext();
+            context = new RadioTVIngestContext();
         }
         return context;
     }

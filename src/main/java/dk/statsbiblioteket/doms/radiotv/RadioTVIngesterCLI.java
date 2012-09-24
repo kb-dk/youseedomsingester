@@ -1,17 +1,16 @@
-package dk.statsbiblioteket.doms.yousee;
+package dk.statsbiblioteket.doms.radiotv;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dk.statsbiblioteket.doms.common.IngestContext;
 import dk.statsbiblioteket.doms.common.OptionParseException;
 
 /**
  * Command line interface for doms ingest in YouSee workflow.
  */
-public class YouseeIngesterCLI {
+public class RadioTVIngesterCLI {
     /** Log for this class. */
-    private static final Logger log = LoggerFactory.getLogger(YouseeIngesterCLI.class);
+    private static final Logger log = LoggerFactory.getLogger(RadioTVIngesterCLI.class);
 
     /**
      * Parse options and ingest into doms.
@@ -19,9 +18,9 @@ public class YouseeIngesterCLI {
      * @param args Options. Run with no parameters to get usage.
      */
     public static void main(String[] args) {
-        YouseeIngestContext context;
+        RadioTVIngestContext context;
         try {
-            context = (YouseeIngestContext) new YouseeOptionParser().parseOptions(args);
+            context = (RadioTVIngestContext) new RadioTVOptionParser().parseOptions(args);
         } catch (OptionParseException e1) {
             System.exit(1);
             return;
@@ -29,7 +28,7 @@ public class YouseeIngesterCLI {
 
         String uuid;
         try {
-            uuid = new YouseeIngesterFactory(context).getIngester().ingest(context);
+            uuid = new RadioTVIngesterFactory(context).getIngester().ingest(context);
         } catch (Exception e) {
             System.err.println("Unable to ingest '" + context.getFilename()
                     + "' into doms: " + e);

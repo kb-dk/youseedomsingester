@@ -1,4 +1,4 @@
-package dk.statsbiblioteket.doms.yousee;
+package dk.statsbiblioteket.doms.radiotv;
 
 import java.util.Properties;
 
@@ -7,7 +7,7 @@ import dk.statsbiblioteket.doms.common.IngestContext;
 /**
  * Tuple of input data for ingest.
  */
-public class YouseeIngestContext implements IngestContext {
+public class RadioTVIngestContext implements IngestContext {
     private String remoteURL;
     private String ffprobeContents;
     private String crosscheckContents;
