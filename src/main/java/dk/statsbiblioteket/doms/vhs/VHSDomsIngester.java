@@ -36,7 +36,7 @@ public class VHSDomsIngester extends DomsIngester {
             vhsContext = (VHSIngestContext) context;
         }
         // Template object to clone to get new objects, get from properties file or command line
-        String template = context.getTemplatePid();
+        String template = vhsContext.getTemplatePid();
         if (template == null){
             template = config.getProperty(TEMPLATE_PROPERTY,
                             "doms:Template_VHSFile"); // 2nd arg is default value
@@ -86,15 +86,15 @@ public class VHSDomsIngester extends DomsIngester {
             centralWebservice.markPublishedObject(Arrays.asList(
                     PIDOfObjectWithURL), message);
 
-            if (context.getProgramPid()!= null){
-                centralWebservice.markInProgressObject(Arrays.asList(context.getProgramPid()),message);
+            if (vhsContext.getProgramPid()!= null){
+                centralWebservice.markInProgressObject(Arrays.asList(vhsContext.getProgramPid()),message);
                 Relation rel = new Relation();
                 rel.setLiteral(false);
                 rel.setPredicate("http://doms.statsbiblioteket.dk/relations/default/0/1/#hasFile");
-                rel.setObject(context.getProgramPid());
+                rel.setObject(vhsContext.getProgramPid());
                 rel.setSubject(PIDOfObjectWithURL);
-                centralWebservice.addRelation(context.getProgramPid(),rel,message);
-                centralWebservice.markPublishedObject(Arrays.asList(context.getProgramPid()),message);
+                centralWebservice.addRelation(vhsContext.getProgramPid(),rel,message);
+                centralWebservice.markPublishedObject(Arrays.asList(vhsContext.getProgramPid()),message);
             }
             return PIDOfObjectWithURL;
         } catch (Exception e) {
