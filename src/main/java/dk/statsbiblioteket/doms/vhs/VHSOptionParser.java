@@ -19,7 +19,7 @@ public class VHSOptionParser extends DomsOptionParser {
         options.addOption(DomsOptionParser.FILENAME_OPTION);
         options.addOption(DomsOptionParser.URL_OPTION);
         options.addOption(DomsOptionParser.FFPROBE_LOCATION_OPTION);
-        options.addOption(VHSOptionParser.METADATA_LOCATION_OPTION);
+        options.addOption(DomsOptionParser.METADATA_LOCATION_OPTION);
         for (Object option : options.getOptions()) {
             if (option instanceof Option) {
                 ((Option) option).setRequired(true);
