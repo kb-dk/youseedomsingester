@@ -99,7 +99,6 @@ public abstract class DomsOptionParser {
         parsePassword(cmd);
         parseTemplate(cmd);
         parseWSDL(cmd);
-        parseProgramPid(cmd);
 
 
         parseSpecifics(cmd);
@@ -110,12 +109,6 @@ public abstract class DomsOptionParser {
         return getContext();
     }
 
-    private void parseProgramPid(CommandLine cmd) {
-        String username = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());
-        if (username != null) {
-            getContext().setProgramPid(username);
-        }
-    }
 
     private void parseWSDL(CommandLine cmd) {
         String username = cmd.getOptionValue(WSDL_OPTION.getOpt());

@@ -1,5 +1,6 @@
 package dk.statsbiblioteket.doms.vhs;
 
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.slf4j.Logger;
@@ -46,4 +47,13 @@ public class VHSOptionParser extends DomsOptionParser {
     protected String getHelpText() {
         return "vhsDomsIngester";
     }
+
+    @Override
+    protected void parseSpecifics(CommandLine cmd) {
+        String username = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());
+        if (username != null) {
+            ((VHSIngestContext) getContext()).setProgramPid(username);
+        }
+    }
+
 }
