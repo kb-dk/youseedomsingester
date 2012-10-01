@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="broadcast_metadata"
+                type="broadcast_metadata"/>
+
+    <xs:complexType name="broadcast_metadata">
+        <xs:sequence>
+            <xs:element name="channels" type="channels"/>
+            <xs:element name="filename" type="xs:string"/>
+            <xs:element name="checksum" type="xs:string"/>
+            <xs:element name="recorder" type="xs:string"/>
+            <xs:element name="format" type="xs:string"/>
+            <xs:element name="start_time" type="xs:dateTime"/>
+            <xs:element name="stop_time" type="xs:dateTime"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="channels">
+        <xs:sequence>
+            <xs:element type="channel" name="channel"
+                        minOccurs="1" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="channel">
+        <xs:sequence>
+            <xs:element name="channelID" type="xs:string"/>
+            <xs:element name="muxProgramNr" type="xs:int"
+                        minOccurs="0"/>
+            <xs:element name="start_time" type="xs:dateTime"
+                        minOccurs="0"/>
+            <xs:element name="stop_time" type="xs:dateTime"
+                        minOccurs="0"/>
+            <xs:element name="format_uri" type="xs:string"
+                        minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
+

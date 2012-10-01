@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ffprobe:ffprobeStdErrorOutput xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:ffprobe='http://www.ffmpeg.org/schema/ffprobe'>
+
+    ffprobe version 0.10 Copyright (c) 2007-2012 the FFmpeg developers
+    built on Mar  9 2012 09:32:12 with gcc 4.4.6 20110731 (Red Hat 4.4.6-3)
+    configuration: --prefix=/usr --libdir=/usr/lib64 --shlibdir=/usr/lib64 --mandir=/usr/share/man --enable-shared --enable-runtime-cpudetect --enable-gpl --enable-version3 --enable-nonfree --enable-postproc --enable-avfilter --enable-pthreads --disable-avisynth --enable-libfaac --enable-libgsm --enable-libmp3lame --enable-libvorbis --enable-libx264 --extra-cflags='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -fPIC' --disable-stripping --disable-demuxer=v4l --disable-demuxer=v4l2 --disable-indev=v4l --disable-indev=v4l2
+    libavutil      51. 34.101 / 51. 34.101
+    libavcodec     53. 60.100 / 53. 60.100
+    libavformat    53. 31.100 / 53. 31.100
+    libavdevice    53.  4.100 / 53.  4.100
+    libavfilter     2. 60.100 /  2. 60.100
+    libswscale      2.  1.100 /  2.  1.100
+    libswresample   0.  6.100 /  0.  6.100
+    libpostproc    52.  0.100 / 52.  0.100
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    Last message repeated 1 times
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x136be40] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mpeg2video @ 0x13af4a0] mpeg_decode_postinit() failure
+    [mpeg2video @ 0x13b5980] mpeg_decode_postinit() failure
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mp1 @ 0x13a6500] Header missing
+    [mp1 @ 0x139ff60] Header missing
+    [mp1 @ 0x13995a0] Header missing
+    [mpegts @ 0x1343920] Could not find codec parameters (Audio: mp1 ([6][0][0][0] / 0x0006), 0 channels, s16)
+    Last message repeated 2 times
+    [NULL @ 0x13dff00] start time is not set in estimate_timings_from_pts
+    [mpegts @ 0x1343920] PES packet size mismatch
+    Last message repeated 7 times
+    Input #0, mpegts, from 'mux1.1305226800-2011-05-12-21.00.00_1305230400-2011-05-12-22.00.00_dvb1-2.ts':
+    Duration: 19:41:24.36, start: 17498.685933, bitrate: 1010 kb/s
+    Program 81
+    Metadata:
+    service_name    : OAD MUX1
+    service_provider: DIGI-TV
+    Program 101
+    Metadata:
+    service_name    : DR1
+    service_provider: DR
+    Stream #0:0[0x6f]: Video: mpeg2video (Main) ([2][0][0][0] / 0x0002), yuv420p, 704x576 [SAR 16:11 DAR 16:9], 15000 kb/s, 28.72 fps, 25 tbr, 90k tbn, 50 tbc
+    Stream #0:1[0x79](dan): Audio: mp2 ([3][0][0][0] / 0x0003), 48000 Hz, stereo, s16, 256 kb/s
+    Stream #0:2[0x83](dan): Subtitle: dvb_teletext ([6][0][0][0] / 0x0006)
+    Program 102
+    Metadata:
+    service_name    : DR2
+    service_provider: DR
+    Stream #0:9[0xd3]: Video: mpeg2video (Main) ([2][0][0][0] / 0x0002), yuv420p, 704x576 [SAR 16:11 DAR 16:9], 15000 kb/s, 29.89 fps, 25 tbr, 90k tbn, 50 tbc
+    Stream #0:11[0xdd](dan): Audio: mp2 ([3][0][0][0] / 0x0003), 48000 Hz, stereo, s16, 256 kb/s
+    Stream #0:7[0xe7](dan): Audio: mp1 ([6][0][0][0] / 0x0006), 0 channels, s16
+    Program 111
+    Metadata:
+    service_name    : DR Synstolkning
+    service_provider: DR
+    Stream #0:0[0x6f]: Video: mpeg2video (Main) ([2][0][0][0] / 0x0002), yuv420p, 704x576 [SAR 16:11 DAR 16:9], 15000 kb/s, 28.72 fps, 25 tbr, 90k tbn, 50 tbc
+    Stream #0:12[0x7a](dan): Audio: mp2 ([3][0][0][0] / 0x0003), 48000 Hz, stereo, s16, 256 kb/s
+    Stream #0:2[0x83](dan): Subtitle: dvb_teletext ([6][0][0][0] / 0x0006)
+    Program 213
+    Metadata:
+    service_name    : ?TV 2 (\D8stjylland)
+    service_provider: TV 2
+    Stream #0:8[0x83f]: Video: mpeg2video (Main) ([2][0][0][0] / 0x0002), yuv420p, 704x576 [SAR 16:11 DAR 16:9], 15000 kb/s, 29.79 fps, 25 tbr, 90k tbn, 50 tbc
+    Stream #0:10[0x849](dan): Audio: mp2 ([3][0][0][0] / 0x0003), 48000 Hz, stereo, s16, 256 kb/s
+    Stream #0:5[0x853](dan): Audio: mp1 ([6][0][0][0] / 0x0006), 0 channels, s16
+    Stream #0:13[0x857](dan): Subtitle: dvb_subtitle ([6][0][0][0] / 0x0006)
+    Stream #0:14[0x858](dan): Subtitle: dvb_subtitle ([6][0][0][0] / 0x0006) (hearing impaired)
+    Program 413
+    Metadata:
+    service_name    : ?\D8stjylland
+    service_provider: DIGI-TV
+    Stream #0:3[0x19b]: Video: mpeg2video (Main) ([2][0][0][0] / 0x0002), yuv420p, 704x576 [SAR 16:11 DAR 16:9], 15000 kb/s, 25 fps, 25 tbr, 90k tbn, 50 tbc
+    Stream #0:4[0x1a5](dan): Audio: mp2 ([3][0][0][0] / 0x0003), 48000 Hz, stereo, s16, 256 kb/s
+    Stream #0:6[0x1af](dan): Audio: mp1 ([6][0][0][0] / 0x0006), 0 channels, s16
+    Unsupported codec with id 94215 for input stream 2
+
+</ffprobe:ffprobeStdErrorOutput>
