@@ -3,6 +3,7 @@ package dk.statsbiblioteket.doms.radiotv;
 import dk.statsbiblioteket.doms.central.CentralWebservice;
 import dk.statsbiblioteket.doms.common.IngestContext;
 import dk.statsbiblioteket.util.Files;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -70,6 +71,7 @@ public class DomsIngesterTest {
      * @throws Exception
      */
     @Test
+    @Ignore
     public void testIngestWithRealDOMS() throws Exception {
 
         String resourceDir = new File(Thread.currentThread().getContextClassLoader().getResource("crosscheckSample.xml").toURI()).getParent();

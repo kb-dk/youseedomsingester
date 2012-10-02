@@ -7,6 +7,8 @@ import dk.statsbiblioteket.doms.vhs.VHSOptionParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.JAXBException;
+
 /**
  * Command line interface for doms ingest in VHS workflow.
  */
@@ -19,11 +21,11 @@ public class VHSIngesterCLI {
      *
      * @param args Options. Run with no parameters to get usage.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JAXBException {
         IngestContext context;
         try {
             context = new VHSOptionParser().parseOptions(args);
-        } catch (OptionParseException e1) {
+        } catch (Exception e1) {
             System.exit(1);
             return;
         }
