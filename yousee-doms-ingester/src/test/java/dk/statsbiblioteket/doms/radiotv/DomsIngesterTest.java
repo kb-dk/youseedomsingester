@@ -71,7 +71,6 @@ public class DomsIngesterTest {
      * @throws Exception
      */
     @Test
-    @Ignore
     public void testIngestWithRealDOMS() throws Exception {
 
         String resourceDir = new File(Thread.currentThread().getContextClassLoader().getResource("crosscheckSample.xml").toURI()).getParent();

@@ -21,11 +21,11 @@ public abstract class IngesterFactory {
         = "http://localhost:7880/centralWebservice-service/central/?wsdl";
     private CentralWebservice centralWebservice;
     private static final String FEDORA_USERNAME_PROPERTY 
-        = "dk.statsbiblioteket.doms.common.fedorausername";
+        = "dk.statsbiblioteket.doms.fedorausername";
     private static final String FEDORA_PASSWORD_PROPERTY 
-        = "dk.statsbiblioteket.doms.common.fedorapassword";
+        = "dk.statsbiblioteket.doms.fedorapassword";
     private static final String FEDORA_WEBSERVICE_URL_PROPERTY 
-        = "dk.statsbiblioteket.doms.common.fedorawebserviceurl";
+        = "dk.statsbiblioteket.doms.fedorawebserviceurl";
     private static final String DEFAULT_FEDORA_USERNAME = "fedoraAdmin";
     private static final String DEFAULT_FEDORA_PASSWORD = "fedoraAdminPass";
     protected final Properties config;
