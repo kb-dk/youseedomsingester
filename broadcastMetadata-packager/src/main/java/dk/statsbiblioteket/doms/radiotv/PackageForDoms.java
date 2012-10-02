@@ -100,6 +100,9 @@ public class PackageForDoms {
         broadcast.setFilename(temp);
         temp = cmd.getOptionValue(CHECKSUM.getOpt(),"");
         broadcast.setChecksum(temp);
+        temp = cmd.getOptionValue(FORMAT.getOpt(),"");
+        broadcast.setFormat(temp);
+
 
         JAXBContext.newInstance(BroadcastMetadata.class.getPackage().getName()).createMarshaller().marshal(new ObjectFactory().createBroadcastMetadata(broadcast),System.out);
     }
