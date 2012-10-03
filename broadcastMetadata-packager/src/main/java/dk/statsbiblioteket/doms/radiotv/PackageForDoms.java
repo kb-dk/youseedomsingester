@@ -58,13 +58,13 @@ public class PackageForDoms {
         options.addOption(RECORDER);
         options.addOption(FILENAME);
         options.addOption(CHECKSUM);
-        options.addOption(MUXCHANNELNR);
 
         for (Object option : options.getOptions()) {
             if (option instanceof Option) {
                 ((Option) option).setRequired(true);
             }
         }
+        options.addOption(MUXCHANNELNR);
 
         try {
             cmd = parser.parse(options, args);
@@ -76,8 +76,10 @@ public class PackageForDoms {
 
         Channel channel = new Channel();
         channel.setChannelID(temp);
-        temp = cmd.getOptionValue(MUXCHANNELNR.getOpt(),"");
-        channel.setMuxProgramNr(Integer.parseInt(temp));
+        temp = cmd.getOptionValue(MUXCHANNELNR.getOpt());
+        if (temp != null){
+            channel.setMuxProgramNr(Integer.parseInt(temp));
+        }
         broadcast.setChannels(new Channels());
         broadcast.getChannels().getChannel().add(channel);
 
