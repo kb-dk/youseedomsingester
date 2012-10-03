@@ -19,6 +19,7 @@
         <module>common-doms-ingester</module>
         <module>vhs-doms-ingester</module>
         <module>broadcastMetadata-packager</module>
+        <module>doms-ingester-utils</module>
     </modules>
 
     <scm>

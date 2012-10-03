@@ -18,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import dk.statsbiblioteket.util.Files;
 
 import javax.xml.bind.*;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.SchemaFactoryLoader;
 
 /** Parse options */
 public abstract class DomsOptionParser {
@@ -59,6 +61,8 @@ public abstract class DomsOptionParser {
         jaxb = JAXBContext.newInstance(FfprobeType.class.getPackage().getName());
         unmarshaller = jaxb.createUnmarshaller();
         marshaller = jaxb.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,Boolean.TRUE);
     }
 
     /**

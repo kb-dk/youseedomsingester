@@ -67,7 +67,7 @@ public class FFProbeParser {
         xpath = xPathfactory.newXPath();
         expr = xpath.compile("ffprobe/streams/stream/@codec_name");
         NodeList codecsNodeList
-        = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
+                = (NodeList) expr.evaluate(doc, XPathConstants.NODESET);
         Set<String> codecSet = new HashSet<String>();
         // Convert nodelist to a set of strings, to remove duplicates
         for(int i = 0; i < codecsNodeList.getLength(); i++) {
@@ -82,7 +82,7 @@ public class FFProbeParser {
         if (format_name.equals(allowedFormatName)){
             format_uri = formaturi;
         } else {
-            throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" + 
+            throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" +
                     format_name + "', required: '" + allowedFormatName +"'");
         }
 
@@ -97,7 +97,7 @@ public class FFProbeParser {
                     }
                 }
                 format_uri = format_uri + "\"";
-            }	
+            }
         }
 
         log.debug("allowedformat: '" + formaturi + "', actual format: '" + format_uri +"'");

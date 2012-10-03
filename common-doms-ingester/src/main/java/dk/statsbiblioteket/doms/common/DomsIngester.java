@@ -64,6 +64,8 @@ public abstract class DomsIngester implements Ingester {
             String message)
                     throws InvalidCredentialsException, InvalidResourceException,
                     MethodFailedException {
+        //Remote any broken xml stuff
+        datastreamContents = datastreamContents.replaceAll("<\\?xml.*\\?>","");
         String datastreamContentsOrig = "";
         boolean update = false;
         try {
