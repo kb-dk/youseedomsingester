@@ -15,7 +15,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.util.Properties;
 
-/** Ingester for Doms. */
+/**
+ * Ingester for Doms.
+ */
 public abstract class DomsIngester implements Ingester {
     protected static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
     protected static final String ALLOWED_FORMAT_NAME_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
@@ -34,7 +36,7 @@ public abstract class DomsIngester implements Ingester {
     protected DocumentBuilder getDocumentBuilder() {
         try {
             DocumentBuilderFactory documentBuilderFactory
-            = DocumentBuilderFactory.newInstance();
+                    = DocumentBuilderFactory.newInstance();
             documentBuilderFactory.setNamespaceAware(true);
             documentBuilderFactory.setCoalescing(true);
             documentBuilderFactory.setIgnoringElementContentWhitespace(true);
@@ -47,30 +49,30 @@ public abstract class DomsIngester implements Ingester {
 
     /**
      * Ingest data from context into DOMS via template given by config.
+     *
      * @param context Command-line input parameters containing metadata to be
-     * ingested in DOMS.
+     *                ingested in DOMS.
      * @return The PID of the resulting DOMS file-object, now containing the
-     * metadata from context.
+     *         metadata from context.
      */
     @Override
     public abstract String ingest(IngestContext context);
 
 
-
     protected void setDatastreamContents(CentralWebservice webservice,
-            String objectWithURL,
-            String datastreamName,
-            String datastreamContents,
-            String message)
-                    throws InvalidCredentialsException, InvalidResourceException,
-                    MethodFailedException {
+                                         String objectWithURL,
+                                         String datastreamName,
+                                         String datastreamContents,
+                                         String message)
+            throws InvalidCredentialsException, InvalidResourceException,
+            MethodFailedException {
         //Remote any broken xml stuff
-        datastreamContents = datastreamContents.replaceAll("<\\?xml.*\\?>","");
+        datastreamContents = datastreamContents.replaceAll("<\\?xml.*\\?>", "");
         String datastreamContentsOrig = "";
         boolean update = false;
         try {
             datastreamContentsOrig
-            = webservice.getDatastreamContents(objectWithURL,
+                    = webservice.getDatastreamContents(objectWithURL,
                     datastreamName);
             update = !xmlEquals(datastreamContentsOrig, datastreamContents);
         } catch (InvalidResourceException e) {
@@ -84,7 +86,7 @@ public abstract class DomsIngester implements Ingester {
 
     public boolean xmlEquals(String ffprobeOrig, String ffprobeContents) {
         try {
-            Document doc1= db.parse(new ByteArrayInputStream(
+            Document doc1 = db.parse(new ByteArrayInputStream(
                     ffprobeOrig.getBytes()));
             doc1.normalizeDocument();
 
