@@ -1,4 +1,4 @@
-<broadcast_metadata>
+<broadcast_metadata xmlns="http://doms.statsbiblioteket.dk/types/broadcast_metadata/0/1/#">
   <channels>
     <!--1 or more repetitions:-->
     <channel>

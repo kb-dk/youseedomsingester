@@ -1,4 +1,4 @@
-<ffprobe:ffprobeStdErrorOutput xmlns:ffprobe='http://www.ffmpeg.org/schema/ffprobe'>
+<ffprobe:ffprobeStdErrorOutput xmlns:ffprobe='http://www.ffmpeg.org/schema/ffprobe/stderr'>
 
     ffprobe version 0.10 Copyright (c) 2007-2012 the FFmpeg developers
     built on Mar  9 2012 09:32:12 with gcc 4.4.6 20110731 (Red Hat 4.4.6-3)

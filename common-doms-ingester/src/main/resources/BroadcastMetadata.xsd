@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema version="1.0"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema
+        xmlns:tns="http://doms.statsbiblioteket.dk/types/broadcast_metadata/0/1/#"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        attributeFormDefault="unqualified"
+        elementFormDefault="qualified"
+        targetNamespace="http://doms.statsbiblioteket.dk/types/broadcast_metadata/0/1/#"
+        version="1.0">
 
     <xs:element name="broadcast_metadata"
-                type="broadcast_metadata"/>
+                type="tns:broadcast_metadata"/>
 
     <xs:complexType name="broadcast_metadata">
         <xs:sequence>
-            <xs:element name="channels" type="channels"/>
+            <xs:element name="channels" type="tns:channels"/>
             <xs:element name="filename" type="xs:string"/>
             <xs:element name="checksum" type="xs:string"/>
             <xs:element name="recorder" type="xs:string"/>
+            <xs:element name="annotation" type="xs:string" minOccurs="0"/>
             <xs:element name="format" type="xs:string"/>
             <xs:element name="start_time" type="xs:dateTime"/>
             <xs:element name="stop_time" type="xs:dateTime"/>
@@ -19,8 +24,8 @@
 
     <xs:complexType name="channels">
         <xs:sequence>
-            <xs:element type="channel" name="channel"
-                        minOccurs="1" maxOccurs="unbounded"></xs:element>
+            <xs:element type="tns:channel" name="channel"
+                        minOccurs="1" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -39,4 +44,3 @@
     </xs:complexType>
 
 </xs:schema>
-
