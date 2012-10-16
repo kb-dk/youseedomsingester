@@ -87,26 +87,25 @@ public class SimpleFFProbeParser {
 
         formatName = formatName.toLowerCase();
 
+        return formatUriFromFFPRobe(formatName, codecs);
+    }
+
+    private static String formatUriFromFFPRobe(String formatName, List<String> codecs) {
         String formatUri = null;
 
-        // wave
-        if (formatName.equals("wav")) {
+        if (formatName.equals("wav")) { // wave
             formatUri = "info:pronom/fmt/6";
-
-        // mpeg
-        } else if (formatName.equals("mpeg")) {
+        } else if (formatName.equals("mpeg")) { // mpeg
             for (String codec : codecs) {
                 if (codec.equals("mpeg1video")) {
                     formatUri = "info:pronom/x-fmt/385";
                     break;
-                } else if (codec.equals("mpeg1video")) {
-                    formatUri = "info:pronom/x-fmt/385";
+                } else if (codec.equals("mpeg2video")) {
+                    formatUri = "info:pronom/x-fmt/386";
                     break;
                 }
             }
-
-        // transport streams
-        } else if (formatName.equals("mpegts")) {
+        } else if (formatName.equals("mpegts")) { // transport streams
             formatUri = "info:mime/video/MP2T";
             if (codecs.size() > 0){
                 formatUri += ";codecs=\"";
@@ -119,15 +118,11 @@ public class SimpleFFProbeParser {
                 }
                 formatUri += "\"";
             }
-
-        // wmv
-        } else if (formatName.equals("asf")) {
+        } else if (formatName.equals("asf")) { // wmv
             formatUri = "info:pronom/fmt/133";
-        // mp4
-        } else if (formatName.equals("mov,mp4,m4a,3gp,3g2,mj2")) {
+        } else if (formatName.equals("mov,mp4,m4a,3gp,3g2,mj2")) { // mp4
             formatUri = "info:pronom/fmt/199";
         }
-
         return formatUri;
     }
 }
