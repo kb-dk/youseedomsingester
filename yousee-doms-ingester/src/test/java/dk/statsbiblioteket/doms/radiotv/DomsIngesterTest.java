@@ -61,7 +61,7 @@ public class DomsIngesterTest {
      * @throws Exception
      */
     @Test
-    @Ignore // new xsd's made this fail
+    //@Ignore // new xsd's made this fail
     public void testIngestWithRealDOMS() throws Exception {
 
         String resourceDir = new File(Thread.currentThread().getContextClassLoader().getResource("crosscheckSample.xml").toURI()).getParent();

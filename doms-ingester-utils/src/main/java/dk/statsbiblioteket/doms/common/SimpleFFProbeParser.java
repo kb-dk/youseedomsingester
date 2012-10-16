@@ -39,7 +39,7 @@ public class SimpleFFProbeParser {
 
         String line;
         while ((line = reader.readLine()) != null) {
-            ffProbeOutput += line + System.lineSeparator();
+            ffProbeOutput += line + System.getProperty("line.Separator");
         }
 
         return getFormatURIFromFFProbeOutput(ffProbeOutput);
