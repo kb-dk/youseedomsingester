@@ -14,8 +14,8 @@ public class PackageForDomsTest {
         String[] args = {
                 "-channelID", "dr1",
                 "-format", "mpegts",
-                "-startTime", "20120915110000",
-                "-endTime", "20120915120000",
+                "-startTime", "20120915T110000+0200",
+                "-endTime", "20120915T120000+0200",
                 "-recorder", "yousee",
                 "-filename", "dr1_yousee.2217592800-2040-04-09-16.00.00_2217596400-2040-04-09-17.00.00_ftp.ts",
                 "-muxChannelNR", "3",

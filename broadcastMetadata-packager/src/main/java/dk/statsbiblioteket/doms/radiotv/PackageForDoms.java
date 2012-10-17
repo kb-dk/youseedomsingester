@@ -43,7 +43,7 @@ public class PackageForDoms {
     protected static final Option MUXCHANNELNR
             = new Option("muxChannelNR", true, "The mux channel nr");
     private static Options options;
-    private static DateFormat ourDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+    private static DateFormat ourDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmssZ");
 
 
     public static void main(String... args) throws OptionParseException, java.text.ParseException, DatatypeConfigurationException, JAXBException {
@@ -85,6 +85,7 @@ public class PackageForDoms {
 
         temp = cmd.getOptionValue(STARTIIME.getOpt(),"");
         GregorianCalendar calStart = new GregorianCalendar();
+
         calStart.setTime(ourDateFormat.parse(temp));
         broadcast.setStartTime(javax.xml.datatype.DatatypeFactory.newInstance().newXMLGregorianCalendar(calStart));
 
