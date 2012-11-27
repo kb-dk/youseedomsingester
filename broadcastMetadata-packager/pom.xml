@@ -5,17 +5,17 @@
     <parent>
         <groupId>dk.statsbiblioteket.medieplatform</groupId>
         <artifactId>yousee-doms-ingester-parent</artifactId>
-        <version>0.1.4</version>
+        <version>0.1.5-SNAPSHOT</version>
     </parent>
 
     <groupId>dk.statsbiblioteket.medieplatform</groupId>
     <artifactId>broadcastMetadata-packager</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
     <dependencies>
         <dependency>
             <groupId>dk.statsbiblioteket.medieplatform</groupId>
             <artifactId>common-doms-ingester</artifactId>
-            <version>0.1.4</version>
+            <version>0.1.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
