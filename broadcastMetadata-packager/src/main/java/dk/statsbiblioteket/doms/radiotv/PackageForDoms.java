@@ -42,6 +42,8 @@ public class PackageForDoms {
             = new Option("checksum", true, "The checksum");
     protected static final Option MUXCHANNELNR
             = new Option("muxChannelNR", true, "The mux channel nr");
+    protected static final Option ANNOTATION
+            = new Option("annotation", true, "String annotation for the object");
     private static Options options;
     private static DateFormat ourDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmssZ");
 
@@ -65,6 +67,7 @@ public class PackageForDoms {
             }
         }
         options.addOption(MUXCHANNELNR);
+        options.addOption(ANNOTATION);
 
         try {
             cmd = parser.parse(options, args);
@@ -103,6 +106,10 @@ public class PackageForDoms {
         temp = cmd.getOptionValue(FORMAT.getOpt(),"");
         broadcast.setFormat(temp);
 
+        temp = cmd.getOptionValue(ANNOTATION.getOpt());
+        if(temp != null) {
+            broadcast.setAnnotation(temp);
+        }
 
         Marshaller marshaller = JAXBContext.newInstance(BroadcastMetadata.class.getPackage().getName()).createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
