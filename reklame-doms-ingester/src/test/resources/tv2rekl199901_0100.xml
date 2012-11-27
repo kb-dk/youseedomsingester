@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><PBCoreDescriptionDocument xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html">
+    <pbcoreAssetType>Tv2reklamefilm</pbcoreAssetType>
+    <pbcoreIdentifier>
+        <identifier>tv2rekl199901_0100</identifier>
+        <identifierSource>Statens Mediesamling TV2 reklamer 1988-2005</identifierSource>
+    </pbcoreIdentifier>
+    <pbcoreTitle>
+        <title>Fanta</title>
+    </pbcoreTitle>
+    <pbcoreTitle>
+        <title>Fanta Drop - Fanta Paris/Share the Fun. Wherever</title>
+        <titleType>alternative</titleType>
+    </pbcoreTitle>
+    <pbcoreSubject>
+        <subject>Drikkevarer</subject>
+        <subjectAuthorityUsed>Statens Mediesamling TV2 reklamer 1988-2005 vocabulary top-level</subjectAuthorityUsed>
+    </pbcoreSubject>
+    <pbcoreSubject>
+        <subject>Læskedrikke</subject>
+        <subjectAuthorityUsed>Statens Mediesamling TV2 reklamer 1988-2005 vocabulary bottom-level</subjectAuthorityUsed>
+    </pbcoreSubject>
+    <pbcoreDescription>
+        <description/>
+    </pbcoreDescription>
+    <pbcoreGenre>
+        <genre>Advertising</genre>
+        <genreAuthorityUsed>EBUContentGenre</genreAuthorityUsed>
+    </pbcoreGenre>
+    <pbcoreCreator>
+        <creator>Coca Cola Danmark A/S</creator>
+        <creatorRole>Creator</creatorRole>
+    </pbcoreCreator>
+    <pbcoreCreator>
+        <creator>Para Film</creator>
+        <creatorRole>Producer</creatorRole>
+    </pbcoreCreator>
+    <pbcoreCreator>
+        <creator>Tarsan Film</creator>
+        <creatorRole>Production Unit</creatorRole>
+    </pbcoreCreator>
+    <pbcoreInstantiation>
+        <pbcoreFormatID>
+            <formatIdentifier>tv2rekl199901_0100</formatIdentifier>
+            <formatIdentifierSource>Statens Mediesamling TV2 reklamer 1988-2005</formatIdentifierSource>
+        </pbcoreFormatID>
+        <dateIssued>1999-01-05+0100</dateIssued>
+        <formatLocation>tv2rekl199901_0100.mpg</formatLocation>
+        <formatDuration>00:00:30</formatDuration>
+        <language>dan</language>
+    </pbcoreInstantiation>
+    <pbcoreExtension>
+       <extension>locationoforiginalproduction: Dansk</extension>
+       <extensionAuthorityUsed>Statens Mediesamling TV2 reklamer 1988-2005</extensionAuthorityUsed>
+   </pbcoreExtension>
+</PBCoreDescriptionDocument>

@@ -1,0 +1,17 @@
+<ffprobe:ffprobeStdErrorOutput xmlns:ffprobe='http://www.ffmpeg.org/schema/ffprobe/stderr'>
+ffprobe version 0.10.5 Copyright (c) 2007-2012 the FFmpeg developers
+  built on Oct  4 2012 19:17:43 with gcc 4.7.2 20120921 (Red Hat 4.7.2-2)
+  configuration: --prefix=/usr --bindir=/usr/bin --datadir=/usr/share/ffmpeg --incdir=/usr/include/ffmpeg --libdir=/usr/lib64 --mandir=/usr/share/man --arch=x86_64 --extra-cflags='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic' --enable-bzlib --disable-crystalhd --enable-gnutls --enable-libass --enable-libcdio --enable-libcelt --enable-libdc1394 --disable-indev=jack --enable-libfreetype --enable-libgsm --enable-libmp3lame --enable-openal --enable-libopenjpeg --enable-libpulse --enable-librtmp --enable-libschroedinger --enable-libspeex --enable-libtheora --enable-libvorbis --enable-libv4l2 --enable-libvpx --enable-libx264 --enable-libxvid --enable-x11grab --enable-avfilter --enable-postproc --enable-pthreads --disable-static --enable-shared --enable-gpl --disable-debug --disable-stripping --shlibdir=/usr/lib64 --enable-runtime-cpudetect
+  libavutil      51. 35.100 / 51. 35.100
+  libavcodec     53. 61.100 / 53. 61.100
+  libavformat    53. 32.100 / 53. 32.100
+  libavdevice    53.  4.100 / 53.  4.100
+  libavfilter     2. 61.100 /  2. 61.100
+  libswscale      2.  1.100 /  2.  1.100
+  libswresample   0.  6.100 /  0.  6.100
+  libpostproc    52.  0.100 / 52.  0.100
+Input #0, mpeg, from 'tv2rekl199901_0100.mpg':
+  Duration: 00:00:30.24, start: 0.184656, bitrate: 8534 kb/s
+    Stream #0:0[0x1e0]: Video: mpeg2video (Main), yuv420p, 720x576 [SAR 16:15 DAR 4:3], 8027 kb/s, 25 fps, 25 tbr, 90k tbn, 50 tbc
+    Stream #0:1[0x1c0]: Audio: mp2, 48000 Hz, stereo, s16, 192 kb/s
+</ffprobe:ffprobeStdErrorOutput>

@@ -18,6 +18,7 @@
         <module>yousee-doms-ingester</module>
         <module>common-doms-ingester</module>
         <module>vhs-doms-ingester</module>
+        <module>reklame-doms-ingester</module>
         <module>broadcastMetadata-packager</module>
         <module>doms-ingester-utils</module>
     </modules>

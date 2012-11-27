@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ffprobe:ffprobe xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:ffprobe='http://www.ffmpeg.org/schema/ffprobe' xsi:schemaLocation='http://www.ffmpeg.org/schema/ffprobe ffprobe.xsd'>
+    <streams>
+        <stream index="0" codec_name="mpeg2video" codec_long_name="MPEG-2 video" codec_type="video" codec_time_base="1/50" codec_tag_string="[0][0][0][0]" codec_tag="0x0000" width="720" height="576" has_b_frames="1" sample_aspect_ratio="16:15" display_aspect_ratio="4:3" pix_fmt="yuv420p" level="8" timecode="00:00:00:00" id="0x1e0" r_frame_rate="25/1" avg_frame_rate="25/1" time_base="1/90000" start_time="0.184656" duration="30.240000"/>
+        <stream index="1" codec_name="mp2" codec_long_name="MP2 (MPEG audio layer 2)" codec_type="audio" codec_time_base="1/48000" codec_tag_string="[0][0][0][0]" codec_tag="0x0000" sample_fmt="s16" sample_rate="48000" channels="2" bits_per_sample="0" id="0x1c0" r_frame_rate="0/0" avg_frame_rate="125/3" time_base="1/90000" start_time="0.184656" duration="30.216000"/>
+    </streams>
+
+    <format filename="tv2rekl199901_0101.mpg" nb_streams="2" format_name="mpeg" format_long_name="MPEG-PS format" start_time="0.184656" duration="30.240000" size="32260096" bit_rate="8534416"/>
+</ffprobe:ffprobe>

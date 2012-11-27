@@ -1,0 +1,17 @@
+<xs:schema
+        xmlns:tns="http://doms.statsbiblioteket.dk/types/reklame_metadata/0/1/#"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        attributeFormDefault="unqualified"
+        elementFormDefault="qualified"
+        targetNamespace="http://doms.statsbiblioteket.dk/types/reklame_metadata/0/1/#"
+        version="1.0">
+
+    <xs:element name="reklame_metadata"
+                type="tns:reklame_metadata"/>
+
+    <xs:complexType name="reklame_metadata">
+        <xs:sequence>
+            <xs:element name="checksum" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
