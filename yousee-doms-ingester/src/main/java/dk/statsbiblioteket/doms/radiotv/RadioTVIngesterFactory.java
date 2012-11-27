@@ -11,7 +11,7 @@ public class RadioTVIngesterFactory extends IngesterFactory {
     /**
      * Initialise factory with given configuration.
      *
-     * @param config The configuration.
+     * @param context The configuration.
      */
     public RadioTVIngesterFactory(RadioTVIngestContext context) {
         super(context.getConfig());

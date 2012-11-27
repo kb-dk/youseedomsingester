@@ -2,7 +2,6 @@ package dk.statsbiblioteket.doms.vhs;
 
 import dk.statsbiblioteket.doms.common.Ingester;
 import dk.statsbiblioteket.doms.common.IngesterFactory;
-import dk.statsbiblioteket.doms.vhs.VHSDomsIngester;
 
 /** Create the object instances for doms ingester. */
 public class VHSIngesterFactory extends IngesterFactory {
@@ -12,7 +11,7 @@ public class VHSIngesterFactory extends IngesterFactory {
     /**
      * Initialise factory with given configuration.
      *
-     * @param config The configuration.
+     * @param context The configuration.
      */
     public VHSIngesterFactory(VHSIngestContext context) {
         super(context.getConfig());
