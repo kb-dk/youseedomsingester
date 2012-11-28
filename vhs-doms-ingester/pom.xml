@@ -10,7 +10,6 @@
 
     <groupId>dk.statsbiblioteket.medieplatform</groupId>
     <artifactId>vhs-doms-ingester</artifactId>
-    <version>0.1.5-SNAPSHOT</version>
 
     <dependencies>
         <dependency>

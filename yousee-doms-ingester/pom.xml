@@ -10,7 +10,7 @@
 
     <groupId>dk.statsbiblioteket.medieplatform</groupId>
     <artifactId>yousee-doms-ingester</artifactId>
-    <version>0.1.5-SNAPSHOT</version>
+
     <dependencies>
 
         <dependency>
