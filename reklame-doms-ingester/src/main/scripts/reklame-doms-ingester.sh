@@ -1,7 +1,7 @@
 #!/bin/sh
 
-topdir=$(dirname $(readlink -f $0))/..
+TOPDIR=$(dirname $(readlink -f $0))/..
 
-CLASSPATH="-classpath $topdir/conf:$topdir/lib/*"
+CLASSPATH="-classpath $TOPDIR/conf:$TOPDIR/lib/*"
 MAINCLASS="dk.statsbiblioteket.doms.reklame.ReklameIngesterCLI"
 java $CLASSPATH $MAINCLASS "$@"
