@@ -42,15 +42,15 @@ public class ReklameDomsIngester extends DomsIngester {
             reklameContext = (ReklameIngestContext) context;
         }
         // Template object to clone to get new file objects, get from properties file or command line
-        String template = reklameContext.getTemplatePid();
-        if (template == null) {
-            template = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_ReklameFile"); // 2nd arg is default value
+        String fileTemplate = reklameContext.getTemplatePid();
+        if (fileTemplate == null) {
+            fileTemplate = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_ReklameFile"); // 2nd arg is default value
         }
 
         // Template object to clone to get new reklame objects, get from properties file or command line
-        String reklametemplate = reklameContext.getReklameTemplatePid();
-        if (reklametemplate == null) {
-            reklametemplate = config
+        String reklameTemplate = reklameContext.getReklameTemplatePid();
+        if (reklameTemplate == null) {
+            reklameTemplate = config
                     .getProperty(REKLAMETEMPLATE_PROPERTY, "doms:Template_Reklamefilm"); // 2nd arg is default value
         }
 
@@ -74,24 +74,25 @@ public class ReklameDomsIngester extends DomsIngester {
 
             fileObjectPid = centralWebservice.getFileObjectWithURL(reklameContext.getRemoteURL());
             if (fileObjectPid == null) {
-                // If not found, clone reklametemplate (config)
-                fileObjectPid = centralWebservice.newObject(template, null, message);
+                // If not found, clone reklameFile template (config)
+                fileObjectPid = centralWebservice.newObject(fileTemplate, null, message);
                 centralWebservice.addFileFromPermanentURL(fileObjectPid, reklameContext.getFilename(), null,
                                                           reklameContext.getRemoteURL(), formatUri, message);
             }
 
-            // Via DOMS Central, get PID of DOMS file-object which corresponds
-            // to the file with the given URL (URL from context).
+            // Via DOMS Central, get PID of DOMS reklamefilm object which corresponds
+            // to the file with the given ID (ID from pbcore).
             String pbcoreIdentifier = getIdFromPbCore(pbcoreDocument);
             List<String> reklameObjectPids;
             String reklameObjectPid;
 
             reklameObjectPids = centralWebservice.findObjectFromDCIdentifier(pbcoreIdentifier);
             if (reklameObjectPids == null || reklameObjectPids.size() == 0) {
-                // If not found, clone reklametemplate (config)
+                // If not found, clone reklamefilm template (config)
                 reklameObjectPid = centralWebservice
-                        .newObject(reklametemplate, Arrays.asList(pbcoreIdentifier), message);
+                        .newObject(reklameTemplate, Arrays.asList(pbcoreIdentifier), message);
             } else {
+                // there should be only one, but if there are more, pick the first one.
                 reklameObjectPid = reklameObjectPids.get(0);
             }
 
