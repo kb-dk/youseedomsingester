@@ -47,22 +47,11 @@ public class ReklameDomsIngester extends DomsIngester {
             fileTemplate = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_ReklameFile"); // 2nd arg is default value
         }
 
-        // Template object to clone to get new reklame objects, get from properties file or command line
-        String reklameTemplate = reklameContext.getReklameTemplatePid();
-        if (reklameTemplate == null) {
-            reklameTemplate = config
-                    .getProperty(REKLAMETEMPLATE_PROPERTY, "doms:Template_Reklamefilm"); // 2nd arg is default value
-        }
-
         String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY, "mpeg");
         String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");
 
         // Get FFProbe output from context
         String FFProbeOutput = reklameContext.getFfprobeContents();
-
-        // Get pbcore from context
-        String pbCoreMetadata = reklameContext.getPbCoreContents();
-        Document pbcoreDocument = DOM.stringToDOM(pbCoreMetadata, true);
 
         try {
             // Via DOMS Central, get PID of DOMS file-object which corresponds
@@ -80,24 +69,8 @@ public class ReklameDomsIngester extends DomsIngester {
                                                           reklameContext.getRemoteURL(), formatUri, message);
             }
 
-            // Via DOMS Central, get PID of DOMS reklamefilm object which corresponds
-            // to the file with the given ID (ID from pbcore).
-            String pbcoreIdentifier = getIdFromPbCore(pbcoreDocument);
-            List<String> reklameObjectPids;
-            String reklameObjectPid;
-
-            reklameObjectPids = centralWebservice.findObjectFromDCIdentifier(pbcoreIdentifier);
-            if (reklameObjectPids == null || reklameObjectPids.size() == 0) {
-                // If not found, clone reklamefilm template (config)
-                reklameObjectPid = centralWebservice
-                        .newObject(reklameTemplate, Arrays.asList(pbcoreIdentifier), message);
-            } else {
-                // there should be only one, but if there are more, pick the first one.
-                reklameObjectPid = reklameObjectPids.get(0);
-            }
-
             // Mark object as in progress
-            centralWebservice.markInProgressObject(Arrays.asList(fileObjectPid, reklameObjectPid), message);
+            centralWebservice.markInProgressObject(Arrays.asList(fileObjectPid), message);
 
             // Update elements of object from context
             setDatastreamContents(centralWebservice, fileObjectPid, "FFPROBE", reklameContext.getFfprobeContents(),
@@ -107,22 +80,59 @@ public class ReklameDomsIngester extends DomsIngester {
             // Checksum is assumed to be part of received metadata.
             setDatastreamContents(centralWebservice, fileObjectPid, "REKLAME_METADATA",
                                   reklameContext.getReklameMetadata(), message);
-            // Add pbcore metadata
-            setDatastreamContents(centralWebservice, reklameObjectPid, "PBCORE", reklameContext.getPbCoreContents(),
-                                  message);
-            // Set label
-            centralWebservice.setObjectLabel(reklameObjectPid, getTitleFromPbCore(pbcoreDocument), message);
-            Relation rel = new Relation();
-            rel.setLiteral(false);
-            rel.setSubject(reklameObjectPid);
-            rel.setPredicate("http://doms.statsbiblioteket.dk/relations/default/0/1/#hasFile");
-            rel.setObject(fileObjectPid);
-            centralWebservice.addRelation(reklameObjectPid, rel, message);
 
             // Mark object as published
-            centralWebservice.markPublishedObject(Arrays.asList(fileObjectPid, reklameObjectPid), message);
+            centralWebservice.markPublishedObject(Arrays.asList(fileObjectPid), message);
 
-            return reklameObjectPid;
+            // Get pbcore from context
+            String pbCoreMetadata = reklameContext.getPbCoreContents();
+            if (pbCoreMetadata != null) {
+
+                Document pbcoreDocument = DOM.stringToDOM(pbCoreMetadata, true);
+
+                // Template object to clone to get new reklame objects, get from properties file or command line
+                String reklameTemplate = reklameContext.getReklameTemplatePid();
+                if (reklameTemplate == null) {
+                    reklameTemplate = config
+                            .getProperty(REKLAMETEMPLATE_PROPERTY, "doms:Template_Reklamefilm"); // 2nd arg is default value
+                }
+
+                // Via DOMS Central, get PID of DOMS reklamefilm object which corresponds
+                // to the file with the given ID (ID from pbcore).
+                String pbcoreIdentifier = getIdFromPbCore(pbcoreDocument);
+                List<String> reklameObjectPids;
+                String reklameObjectPid;
+
+                reklameObjectPids = centralWebservice.findObjectFromDCIdentifier(pbcoreIdentifier);
+                if (reklameObjectPids == null || reklameObjectPids.size() == 0) {
+                    // If not found, clone reklamefilm template (config)
+                    reklameObjectPid = centralWebservice
+                            .newObject(reklameTemplate, Arrays.asList(pbcoreIdentifier), message);
+                } else {
+                    // there should be only one, but if there are more, pick the first one.
+                    reklameObjectPid = reklameObjectPids.get(0);
+                }
+
+                // Mark object as in progress
+                centralWebservice.markInProgressObject(Arrays.asList(reklameObjectPid), message);
+
+                // Add pbcore metadata
+                setDatastreamContents(centralWebservice, reklameObjectPid, "PBCORE", reklameContext.getPbCoreContents(),
+                                      message);
+                // Set label
+                centralWebservice.setObjectLabel(reklameObjectPid, getTitleFromPbCore(pbcoreDocument), message);
+                Relation rel = new Relation();
+                rel.setLiteral(false);
+                rel.setSubject(reklameObjectPid);
+                rel.setPredicate("http://doms.statsbiblioteket.dk/relations/default/0/1/#hasFile");
+                rel.setObject(fileObjectPid);
+                centralWebservice.addRelation(reklameObjectPid, rel, message);
+
+                // Mark object as published
+                centralWebservice.markPublishedObject(Arrays.asList(reklameObjectPid), message);
+            }
+
+            return fileObjectPid;
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage(), e);
         }
