@@ -5,10 +5,11 @@
     <formats>
         <format>tar.gz</format>
     </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
 
     <dependencySets>
         <dependencySet>
-            <outputDirectory>lib</outputDirectory>
+            <outputDirectory></outputDirectory>
             <useTransitiveDependencies>true</useTransitiveDependencies>
             <useTransitiveFiltering>true</useTransitiveFiltering>
             <includes>
@@ -17,8 +18,8 @@
             <scope>runtime</scope>
         </dependencySet>
     </dependencySets>
-
-    <fileSets>
+<!--
+<fileSets>
         <fileSet>
             <outputDirectory>bin</outputDirectory>
             <directory>src/main/scripts</directory>
@@ -28,6 +29,6 @@
             <outputDirectory>conf</outputDirectory>
             <directory>conf</directory>
         </fileSet>
-    </fileSets>
+    </fileSets>-->
 </assembly>
 
