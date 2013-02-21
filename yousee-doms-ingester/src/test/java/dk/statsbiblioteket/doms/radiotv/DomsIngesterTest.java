@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import static org.junit.Assert.assertTrue;
@@ -96,9 +97,9 @@ public class DomsIngesterTest {
      * @throws IOException In case xml files could not be loaded
      */
     @Test
-    public void testXmlCompare() throws IOException {
-        String ffprobeContents = Files.loadString(new File("src/test/resources/ffprobeSample.xml"));
-        String ffprobeContentsDifferent = Files.loadString(new File("src/test/resources/ffprobeSample-different.xml"));
+    public void testXmlCompare() throws IOException, URISyntaxException {
+        String ffprobeContents = Files.loadString(new File(Thread.currentThread().getContextClassLoader().getResource("ffprobeSample.xml").toURI()));
+        String ffprobeContentsDifferent = Files.loadString(new File(Thread.currentThread().getContextClassLoader().getResource("ffprobeSample-different.xml").toURI()));
 
         boolean equals = new RadioTVDomsIngester(null, null).xmlEquals(ffprobeContents, ffprobeContentsDifferent);
         assertTrue(equals);
