@@ -53,9 +53,9 @@ public class VHSOptionParser extends DomsOptionParser {
 
     @Override
     protected void parseSpecifics(CommandLine cmd) {
-        String username = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());
-        if (username != null) {
-            ((VHSIngestContext) getContext()).setProgramPid(username);
+        String programPid = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());
+        if (programPid != null) {
+            ((VHSIngestContext) getContext()).setProgramPid(programPid);
         }
     }
 

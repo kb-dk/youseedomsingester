@@ -154,16 +154,16 @@ public abstract class DomsOptionParser {
 
 
     private void parseWSDL(CommandLine cmd) {
-        String username = cmd.getOptionValue(WSDL_OPTION.getOpt());
-        if (username != null) {
-            getContext().setWSDLlocation(username);
+        String wsdlLocation = cmd.getOptionValue(WSDL_OPTION.getOpt());
+        if (wsdlLocation != null) {
+            getContext().setWSDLlocation(wsdlLocation);
         }
     }
 
     private void parseTemplate(CommandLine cmd) {
-        String username = cmd.getOptionValue(TEMPLATE_OPTION.getOpt());
-        if (username != null) {
-            getContext().setTemplatePid(username);
+        String templatePid = cmd.getOptionValue(TEMPLATE_OPTION.getOpt());
+        if (templatePid != null) {
+            getContext().setTemplatePid(templatePid);
         }
     }
 
