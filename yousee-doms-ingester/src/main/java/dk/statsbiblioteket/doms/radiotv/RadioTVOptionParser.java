@@ -31,14 +31,16 @@ public class RadioTVOptionParser extends DomsOptionParser {
         options.addOption(DomsOptionParser.URL_OPTION);
         options.addOption(DomsOptionParser.FFPROBE_LOCATION_OPTION);
         options.addOption(DomsOptionParser.FFPROBE_ERROR_LOG_LOCATION_OPTION);
-        options.addOption(RadioTVOptionParser.CROSSCHECK_LOCATION_OPTION);
         options.addOption(DomsOptionParser.METADATA_LOCATION_OPTION);
         for (Object option : options.getOptions()) {
             if (option instanceof Option) {
                 ((Option) option).setRequired(true);
             }
         }
+        
+        options.addOption(RadioTVOptionParser.CROSSCHECK_LOCATION_OPTION);
         options.addOption(DomsOptionParser.CONFIG_OPTION);
+        options.addOption(DomsOptionParser.PROGRAM_PID_OPTION);
     }
 
 
@@ -56,7 +58,12 @@ public class RadioTVOptionParser extends DomsOptionParser {
         } catch (IOException e) {
             parseError(e.toString());
             throw new OptionParseException(e.toString());
-        }    
+        }
+        
+        String programPid = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());
+        if (programPid != null) {
+            ((RadioTVIngestContext) getContext()).setProgramPid(programPid);
+        }
     }
 
 
