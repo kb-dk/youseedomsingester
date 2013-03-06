@@ -1,0 +1,31 @@
+<xs:schema
+        xmlns:tns="http://doms.statsbiblioteket.dk/types/vhs_metadata/0/1/#"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           targetNamespace="http://doms.statsbiblioteket.dk/types/vhs_metadata/0/1/#"
+           version="1.0">
+    <xs:element name="vhs_metadata"
+                type="tns:vhs_metadata"/>
+
+    <xs:complexType name="vhs_metadata">
+        <xs:sequence>
+            <xs:element name="channelID" type="xs:string"/>
+            <xs:element name="filename" type="xs:string"/>
+            <xs:element name="checksum" type="xs:string"/>
+            <xs:element name="recorder" type="xs:string"/>
+            <xs:element name="annotation" type="xs:string" minOccurs="0"/>
+            <xs:element name="vhs_label" type="xs:string"/>
+            <xs:element minOccurs="0" name="start_time" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="stop_time" type="xs:dateTime"/>
+            <xs:element name="quality" type="xs:int">
+                <xs:annotation>
+                    <xs:documentation>
+                        Quality indicator on the Rosenthal scale (1,...,10)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="recorded_duration" type="xs:time"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
