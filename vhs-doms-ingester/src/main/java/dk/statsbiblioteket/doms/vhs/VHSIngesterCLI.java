@@ -26,6 +26,7 @@ public class VHSIngesterCLI {
         try {
             context = new VHSOptionParser().parseOptions(args);
         } catch (Exception e1) {
+            System.err.println("Got exception from VHSOptionParser: " + e1.getMessage());
             System.exit(1);
             return;
         }
