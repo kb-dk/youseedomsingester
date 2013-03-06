@@ -67,15 +67,14 @@ public abstract class IngesterFactory {
         }
         String address = context.getWSDLlocation();
         if (address == null){
-            address = config.getProperty(FEDORA_WEBSERVICE_URL_PROPERTY,
-                                            DEFAULT_FEDORA_WEBSERVICE_URL);
+            address = config.getProperty(FEDORA_WEBSERVICE_URL_PROPERTY, DEFAULT_FEDORA_WEBSERVICE_URL);
         }
             
         try {
             if (centralWebservice == null) {
                 CentralWebservice webservice = new CentralWebserviceService(
                         new URL(address),
-                                new QName("http://central.doms.statsbiblioteket.dk/", "CentralWebserviceService"))
+                        new QName("http://central.doms.statsbiblioteket.dk/", "CentralWebserviceService"))
                 .getCentralWebservicePort();
                 Map<String, Object> domsAPILogin = ((BindingProvider) webservice).getRequestContext();
                 domsAPILogin.put(BindingProvider.USERNAME_PROPERTY, username);
