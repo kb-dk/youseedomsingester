@@ -141,12 +141,15 @@ public abstract class DomsOptionParser {
 
     private void parseFFprobeErrorLog(CommandLine cmd) throws OptionParseException, JAXBException {
         String ffprobeLocation = cmd.getOptionValue(FFPROBE_ERROR_LOG_LOCATION_OPTION.getOpt());
-        if (ffprobeLocation != null) {
-            JAXBElement<String> ffprobeObject = (JAXBElement<String>) unmarshaller.unmarshal(new File(ffprobeLocation));
-            StringWriter contents = new StringWriter();
-            marshaller.marshal(ffprobeObject, contents);
-            getContext().setFfprobeErrorContents(contents.toString());
+        if (ffprobeLocation == null) {
+            parseError(FFPROBE_ERROR_LOG_LOCATION_OPTION.toString());
+            throw new OptionParseException(FFPROBE_ERROR_LOG_LOCATION_OPTION.toString());
         }
+
+        JAXBElement<String> ffprobeObject = (JAXBElement<String>) unmarshaller.unmarshal(new File(ffprobeLocation));
+        StringWriter contents = new StringWriter();
+        marshaller.marshal(ffprobeObject, contents);
+        getContext().setFfprobeErrorContents(contents.toString());
     }
 
 
