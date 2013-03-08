@@ -37,7 +37,9 @@ public class RadioTVOptionParser extends DomsOptionParser {
                 ((Option) option).setRequired(true);
             }
         }
-        
+
+        options.addOption(DomsOptionParser.USERNAME_OPTION);
+        options.addOption(DomsOptionParser.PASSWORD_OPTION);
         options.addOption(RadioTVOptionParser.CROSSCHECK_LOCATION_OPTION);
         options.addOption(DomsOptionParser.CONFIG_OPTION);
         options.addOption(DomsOptionParser.PROGRAM_PID_OPTION);
