@@ -49,17 +49,15 @@ public class RadioTVOptionParser extends DomsOptionParser {
     @Override
     protected void parseSpecifics(CommandLine cmd) throws OptionParseException {
         String crosscheckLocation = cmd.getOptionValue(CROSSCHECK_LOCATION_OPTION.getOpt());
-        if (crosscheckLocation == null) {
-            parseError(CROSSCHECK_LOCATION_OPTION.toString());
-            throw new OptionParseException(CROSSCHECK_LOCATION_OPTION.toString());
-        }
-        try {
-            String crosscheckContents = Files.loadString(new File(crosscheckLocation));
-            RadioTVIngestContext context = (RadioTVIngestContext) getContext();
-            context.setCrosscheckContents(crosscheckContents);
-        } catch (IOException e) {
-            parseError(e.toString());
-            throw new OptionParseException(e.toString());
+        if (crosscheckLocation != null) {
+            try {
+                String crosscheckContents = Files.loadString(new File(crosscheckLocation));
+                RadioTVIngestContext context = (RadioTVIngestContext) getContext();
+                context.setCrosscheckContents(crosscheckContents);
+            } catch (IOException e) {
+                parseError(e.toString());
+                throw new OptionParseException(e.toString());
+            }
         }
         
         String programPid = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());

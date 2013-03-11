@@ -42,13 +42,8 @@ public class RadioTVDomsIngester extends DomsIngester {
         // Get FFProbe output from context
         String FFProbeOutput = radioTVContext.getFfprobeContents();
         
-        
-        //String formatUri = config.getProperty(
-        //        "dk.statsbiblioteket.doms.radiotv.formaturi",
-        //        "info:mime/video/MP2T;codecs=\"aac_latm,dvbsub,h264\"");
-
         try {
-            String formatUri = (new FFProbeParser(allowedFormatName, validFormatUri, true))
+            String formatUri = (new FFProbeParser(allowedFormatName, validFormatUri, appendCodecToFormatUri()))
                     .getFormatURIFromFFProbeOutput(FFProbeOutput);
 
             // Via DOMS Central, get PID of DOMS file-object which corresponds
@@ -98,9 +93,9 @@ public class RadioTVDomsIngester extends DomsIngester {
                 centralWebservice.markInProgressObject(Arrays.asList(radioTVContext.getProgramPid()), message);
                 Relation rel = new Relation();
                 rel.setLiteral(false);
+                rel.setSubject(radioTVContext.getProgramPid());
                 rel.setPredicate("http://doms.statsbiblioteket.dk/relations/default/0/1/#hasFile");
-                rel.setObject(radioTVContext.getProgramPid());
-                rel.setSubject(PIDOfObjectWithURL);
+                rel.setObject(PIDOfObjectWithURL);
                 centralWebservice.addRelation(radioTVContext.getProgramPid(), rel, message);
                 centralWebservice.markPublishedObject(Arrays.asList(radioTVContext.getProgramPid()), message);
             }
@@ -110,7 +105,16 @@ public class RadioTVDomsIngester extends DomsIngester {
             throw new RuntimeException(e.getMessage(), e);
         }
     }
-    
+   
+   
+    private boolean appendCodecToFormatUri() {
+        String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY);
+        if(allowedFormatName.equals("mpeg")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     /**
      * Method to check if the config and context is sane 
      */
