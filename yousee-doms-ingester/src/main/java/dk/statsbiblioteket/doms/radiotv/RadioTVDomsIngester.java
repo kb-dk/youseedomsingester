@@ -88,7 +88,7 @@ public class RadioTVDomsIngester extends DomsIngester {
             centralWebservice.markPublishedObject(Arrays.asList(
                     PIDOfObjectWithURL), message);
 
-            // Create the hasFile relation in the Program Object, if any such was provided.
+            // Create the hasFile and hasExactFile relations in the Program Object, if any such was provided.
             if (radioTVContext.getProgramPid() != null){
                 centralWebservice.markInProgressObject(Arrays.asList(radioTVContext.getProgramPid()), message);
                 Relation rel = new Relation();
@@ -97,6 +97,12 @@ public class RadioTVDomsIngester extends DomsIngester {
                 rel.setPredicate("http://doms.statsbiblioteket.dk/relations/default/0/1/#hasFile");
                 rel.setObject(PIDOfObjectWithURL);
                 centralWebservice.addRelation(radioTVContext.getProgramPid(), rel, message);
+                Relation rel2 = new Relation();
+                rel2.setLiteral(false);
+                rel2.setSubject(radioTVContext.getProgramPid());
+                rel2.setPredicate("http://doms.statsbiblioteket.dk/relations/default/0/1/#hasExactFile");
+                rel2.setObject(PIDOfObjectWithURL);
+                centralWebservice.addRelation(radioTVContext.getProgramPid(), rel2, message);
                 centralWebservice.markPublishedObject(Arrays.asList(radioTVContext.getProgramPid()), message);
             }
             
