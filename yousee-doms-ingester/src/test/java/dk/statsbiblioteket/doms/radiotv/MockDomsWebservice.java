@@ -169,6 +169,17 @@ public class MockDomsWebservice implements CentralWebservice {
     }
 
     @Override
+    public ViewBundle getViewBundleFromSpecificTime(
+            @WebParam(name = "pid", targetNamespace = "")
+            String pid,
+            @WebParam(name = "ViewAngle", targetNamespace = "")
+            String viewAngle,
+            @WebParam(name = "asOfTime", targetNamespace = "")
+            long asOfTime) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public List<RecordDescription> getIDsModified(
             @WebParam(name = "since", targetNamespace = "") long l,
             @WebParam(name = "collectionPid", targetNamespace = "") String s,
@@ -197,7 +208,7 @@ public class MockDomsWebservice implements CentralWebservice {
     }
 
     @Override
-    public List<SearchResult> findObjects(
+    public SearchResultList findObjects(
             @WebParam(name = "query", targetNamespace = "") String s,
             @WebParam(name = "offset", targetNamespace = "") int i,
             @WebParam(name = "pageSize", targetNamespace = "") int i1)
@@ -232,5 +243,32 @@ public class MockDomsWebservice implements CentralWebservice {
             throws InvalidCredentialsException, InvalidResourceException,
             MethodFailedException {
         return null;
+    }
+
+    @Override
+    public List<Method> getMethods(
+            @WebParam(name = "pid", targetNamespace = "")
+            String pid) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String invokeMethod(
+            @WebParam(name = "cmpid", targetNamespace = "")
+            String cmpid,
+            @WebParam(name = "methodName", targetNamespace = "")
+            String methodName,
+            @WebParam(name = "parameters", targetNamespace = "")
+            List<Pair> parameters) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<Link> getObjectLinks(
+            @WebParam(name = "pid", targetNamespace = "")
+            String pid,
+            @WebParam(name = "asOfTime", targetNamespace = "")
+            long asOfTime) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }

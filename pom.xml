@@ -67,7 +67,7 @@
             <dependency>
                 <groupId>dk.statsbiblioteket.doms.central</groupId>
                 <artifactId>centralWebservice-interface</artifactId>
-                <version>0.0.26</version>
+                <version>1.0</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

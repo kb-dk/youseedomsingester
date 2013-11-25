@@ -3,11 +3,14 @@ package dk.statsbiblioteket.doms.reklame;
 import dk.statsbiblioteket.doms.central.CentralWebservice;
 import dk.statsbiblioteket.doms.central.InvalidCredentialsException;
 import dk.statsbiblioteket.doms.central.InvalidResourceException;
+import dk.statsbiblioteket.doms.central.Link;
+import dk.statsbiblioteket.doms.central.Method;
 import dk.statsbiblioteket.doms.central.MethodFailedException;
 import dk.statsbiblioteket.doms.central.ObjectProfile;
+import dk.statsbiblioteket.doms.central.Pair;
 import dk.statsbiblioteket.doms.central.RecordDescription;
 import dk.statsbiblioteket.doms.central.Relation;
-import dk.statsbiblioteket.doms.central.SearchResult;
+import dk.statsbiblioteket.doms.central.SearchResultList;
 import dk.statsbiblioteket.doms.central.User;
 import dk.statsbiblioteket.doms.central.ViewBundle;
 
@@ -183,6 +186,19 @@ public class MockupCentralWebservice implements CentralWebservice {
     }
 
     @Override
+    public ViewBundle getViewBundleFromSpecificTime(
+            @WebParam(name = "pid", targetNamespace = "")
+            String pid,
+            @WebParam(name = "ViewAngle", targetNamespace = "")
+            String viewAngle,
+            @WebParam(name = "asOfTime", targetNamespace = "")
+            long asOfTime) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        otherMethodCalled();
+
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
     public List<RecordDescription> getIDsModified(@WebParam(name = "since", targetNamespace = "") long since,
                                                   @WebParam(name = "collectionPid", targetNamespace = "")
                                                   String collectionPid,
@@ -218,7 +234,7 @@ public class MockupCentralWebservice implements CentralWebservice {
     }
 
     @Override
-    public List<SearchResult> findObjects(@WebParam(name = "query", targetNamespace = "") String query,
+    public SearchResultList findObjects(@WebParam(name = "query", targetNamespace = "") String query,
                                           @WebParam(name = "offset", targetNamespace = "") int offset,
                                           @WebParam(name = "pageSize", targetNamespace = "") int pageSize)
             throws InvalidCredentialsException, MethodFailedException {
@@ -251,5 +267,38 @@ public class MockupCentralWebservice implements CentralWebservice {
             throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
         otherMethodCalled();
         return null;
+    }
+
+    @Override
+    public List<Method> getMethods(
+            @WebParam(name = "pid", targetNamespace = "")
+            String pid) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        otherMethodCalled();
+
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public String invokeMethod(
+            @WebParam(name = "cmpid", targetNamespace = "")
+            String cmpid,
+            @WebParam(name = "methodName", targetNamespace = "")
+            String methodName,
+            @WebParam(name = "parameters", targetNamespace = "")
+            List<Pair> parameters) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        otherMethodCalled();
+
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public List<Link> getObjectLinks(
+            @WebParam(name = "pid", targetNamespace = "")
+            String pid,
+            @WebParam(name = "asOfTime", targetNamespace = "")
+            long asOfTime) throws InvalidCredentialsException, InvalidResourceException, MethodFailedException {
+        otherMethodCalled();
+
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 }
