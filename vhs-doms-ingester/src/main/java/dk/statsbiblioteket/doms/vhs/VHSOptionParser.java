@@ -1,8 +1,10 @@
 package dk.statsbiblioteket.doms.vhs;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 
+import dk.statsbiblioteket.util.Files;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -60,14 +62,15 @@ public class VHSOptionParser extends DomsOptionParser {
     }
 
     @Override
-    protected void parseMetadata(CommandLine cmd) throws OptionParseException, JAXBException {
+    protected void parseMetadata(CommandLine cmd) throws OptionParseException {
         String metadataLocation = cmd.getOptionValue(METADATA_LOCATION_OPTION.getOpt());
         if (metadataLocation != null) {
-            JAXBElement<VhsMetadata> metadataObject = (JAXBElement<VhsMetadata>) unmarshaller
-                    .unmarshal(new File(metadataLocation));
-            StringWriter contents = new StringWriter();
-            marshaller.marshal(metadataObject, contents);
-            getContext().setMetadataContents(contents.toString());
+            try {
+                String contents = Files.loadString(new File(metadataLocation));
+                getContext().setMetadataContents(contents);
+            } catch (IOException e) {
+                throw new OptionParseException("Failed to read file '"+metadataLocation+"'",e);
+            }
         }
     }
     
