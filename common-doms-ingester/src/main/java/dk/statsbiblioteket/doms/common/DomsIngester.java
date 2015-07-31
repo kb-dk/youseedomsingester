@@ -13,6 +13,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -20,7 +22,7 @@ import java.util.Properties;
  */
 public abstract class DomsIngester implements Ingester {
     protected static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
-    protected static final String ALLOWED_FORMAT_NAME_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
+    protected static final String ALLOWED_FORMATS_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
     protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
 
     protected final DocumentBuilder db;
@@ -99,5 +101,20 @@ public abstract class DomsIngester implements Ingester {
         }
     }
 
+    protected Map<String,String> getAllowedFormatsProperty() {
+        Map<String, String> allowedFormats= new LinkedHashMap<String, String>();
+        String allowedFormatsString = config.getProperty(ALLOWED_FORMATS_PROPERTY, "\"mpeg\":\"info:pronom/x-fmt/386\"");
+        String[] allowedFormatsStringArray = allowedFormatsString.split(";");
+        for (String format:allowedFormatsStringArray) {
+            String[] formatNameUri = format.split(":");
+            if (formatNameUri.length==2) {
+                allowedFormats.put(formatNameUri[0], formatNameUri[1]);
+            } else {
+                throw new RuntimeException("Invalid allowedformats property in config file: '" +
+                        allowedFormatsString +"'");
+            }
+        }
+        return allowedFormats;
+    }
 
 }

@@ -2,11 +2,7 @@ package dk.statsbiblioteket.doms.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,14 +24,14 @@ import org.xml.sax.SAXException;
  */
 public class FFProbeParser {
 
-    private final String allowedFormatName;
-    private final String formaturi;
+    private final Map<String, String> allowedFormats;
+    //private final String formaturi;
     private final boolean appendCodecsToFormatUri;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public FFProbeParser(String allowedFormatName, String formaturi, boolean appendCodecsToFormatUri) {
-        this.allowedFormatName = allowedFormatName;
-        this.formaturi = formaturi;
+    public FFProbeParser(Map<String, String> allowedFormats, boolean appendCodecsToFormatUri) {
+        this.allowedFormats = allowedFormats;
+        //this.formaturi = formaturi;
         this.appendCodecsToFormatUri = appendCodecsToFormatUri;
     }
 
@@ -79,11 +75,11 @@ public class FFProbeParser {
         Collections.sort(codecs);
 
         String format_uri;
-        if (format_name.equals(allowedFormatName)){
-            format_uri = formaturi;
+        if (allowedFormats.containsKey(format_name)){
+            format_uri = allowedFormats.get(format_name);
         } else {
             throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" +
-                    format_name + "', required: '" + allowedFormatName +"'");
+                    format_name + "', allowed: '" + allowedFormats +"'");
         }
 
         if(appendCodecsToFormatUri) {
@@ -100,7 +96,7 @@ public class FFProbeParser {
             }
         }
 
-        log.debug("allowedformat: '" + formaturi + "', actual format: '" + format_uri +"'");
+        log.debug("allowedformats: '" + allowedFormats + "', actual format: '" + format_uri +"'");
 
         return format_uri;
     }

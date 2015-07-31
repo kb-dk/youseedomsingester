@@ -47,7 +47,7 @@ public class ReklameDomsIngester extends DomsIngester {
             fileTemplate = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_ReklameFile"); // 2nd arg is default value
         }
 
-        String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY, "mpeg");
+        String allowedFormatName = config.getProperty(ALLOWED_FORMATS_PROPERTY, "mpeg");
         String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");
 
         // Get FFProbe output from context
@@ -56,7 +56,7 @@ public class ReklameDomsIngester extends DomsIngester {
         try {
             // Via DOMS Central, get PID of DOMS file-object which corresponds
             // to the file with the given URL (URL from context).
-            String formatUri = (new FFProbeParser(allowedFormatName, validFormatUri, false))
+            String formatUri = (new FFProbeParser(, allowedFormatName, false))
                     .getFormatURIFromFFProbeOutput(FFProbeOutput);
             String message = "Processed by '" + getClass().getName() + "'";
             String fileObjectPid;
