@@ -14,6 +14,7 @@ import dk.statsbiblioteket.util.xml.XPathSelector;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 /** Ingester for Doms. */
@@ -47,8 +48,8 @@ public class ReklameDomsIngester extends DomsIngester {
             fileTemplate = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_ReklameFile"); // 2nd arg is default value
         }
 
-        String allowedFormatName = config.getProperty(ALLOWED_FORMATS_PROPERTY, "mpeg");
-        String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");
+        Map<String,String> allowedFormats = getAllowedFormatsProperty();
+        //String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");
 
         // Get FFProbe output from context
         String FFProbeOutput = reklameContext.getFfprobeContents();
@@ -56,7 +57,7 @@ public class ReklameDomsIngester extends DomsIngester {
         try {
             // Via DOMS Central, get PID of DOMS file-object which corresponds
             // to the file with the given URL (URL from context).
-            String formatUri = (new FFProbeParser(, allowedFormatName, false))
+            String formatUri = new FFProbeParser(allowedFormats, false)
                     .getFormatURIFromFFProbeOutput(FFProbeOutput);
             String message = "Processed by '" + getClass().getName() + "'";
             String fileObjectPid;

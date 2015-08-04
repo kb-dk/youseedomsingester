@@ -22,8 +22,8 @@ import java.util.Properties;
  */
 public abstract class DomsIngester implements Ingester {
     protected static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
-    protected static final String ALLOWED_FORMATS_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
-    protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
+    protected static final String ALLOWED_FORMATS_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformats";
+    //protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
 
     protected final DocumentBuilder db;
     protected final CentralWebservice centralWebservice;
@@ -101,6 +101,10 @@ public abstract class DomsIngester implements Ingester {
         }
     }
 
+    /**
+     * Read the ALLOWED_FORMATS_PROPERTY from config, and transform into a Map.
+     * @return a Map of allowed format names mapping to format URIs
+     */
     protected Map<String,String> getAllowedFormatsProperty() {
         Map<String, String> allowedFormats= new LinkedHashMap<String, String>();
         String allowedFormatsString = config.getProperty(ALLOWED_FORMATS_PROPERTY, "\"mpeg\":\"info:pronom/x-fmt/386\"");

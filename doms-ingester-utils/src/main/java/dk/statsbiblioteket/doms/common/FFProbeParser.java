@@ -35,6 +35,28 @@ public class FFProbeParser {
         this.appendCodecsToFormatUri = appendCodecsToFormatUri;
     }
 
+    public String getFormatNameFromFFProbeOutput(String FFProbeOutput)
+            throws XPathExpressionException, ParserConfigurationException,
+            IOException, SAXException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(new ByteArrayInputStream(
+                FFProbeOutput.getBytes()));
+        XPathFactory xPathfactory = XPathFactory.newInstance();
+
+        XPath xpath;
+        XPathExpression expr;
+        String format_name;
+        xpath = xPathfactory.newXPath();
+        expr = xpath.compile("ffprobe/format/@format_name");
+        format_name = expr.evaluate(doc).trim();
+        if (format_name.isEmpty()){
+            throw new RuntimeException("Invalid ffprobe file, no format_name");
+        }
+        return format_name;
+    }
+
     public String getFormatURIFromFFProbeOutput(String FFProbeOutput)
             throws XPathExpressionException, ParserConfigurationException,
             IOException, SAXException {
