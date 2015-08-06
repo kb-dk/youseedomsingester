@@ -7,6 +7,7 @@ import dk.statsbiblioteket.doms.central.MethodFailedException;
 import dk.statsbiblioteket.doms.common.IngestContext;
 import dk.statsbiblioteket.doms.common.Ingester;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -106,11 +107,12 @@ public abstract class DomsIngester implements Ingester {
      * @return a Map of allowed format names mapping to format URIs
      */
     protected Map<String,String> getAllowedFormatsProperty() {
+        //TODO JSONParser?! (in JSON the ; should be :)
         Map<String, String> allowedFormats= new LinkedHashMap<String, String>();
         String allowedFormatsString = config.getProperty(ALLOWED_FORMATS_PROPERTY, "\"mpeg\":\"info:pronom/x-fmt/386\"");
-        String[] allowedFormatsStringArray = allowedFormatsString.split(";");
+        String[] allowedFormatsStringArray = allowedFormatsString.split(",");
         for (String format:allowedFormatsStringArray) {
-            String[] formatNameUri = format.split(":");
+            String[] formatNameUri = format.split(";");
             if (formatNameUri.length==2) {
                 allowedFormats.put(formatNameUri[0], formatNameUri[1]);
             } else {

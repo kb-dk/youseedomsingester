@@ -46,8 +46,6 @@ public class RadioTVDomsIngester extends DomsIngester {
         try {
             FFProbeParser ffProbeParser = new FFProbeParser(allowedFormats, appendCodecToFormatUri());
             String formatName = ffProbeParser.getFormatNameFromFFProbeOutput(FFProbeOutput);
-
-
             if(formatName.equals("mpeg") && (radioTVContext.getCrosscheckContents() != null)) {
                 throw new RuntimeException("The format name is " + formatName +
                         ", and you provided crosscheckoutput, that cannot be.");
