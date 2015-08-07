@@ -13,8 +13,18 @@
 
     <dependencies>
         <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>dk.statsbiblioteket.medieplatform</groupId>
             <artifactId>common-doms-ingester</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>dk.statsbiblioteket.medieplatform</groupId>
+            <artifactId>yousee-doms-ingester</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
