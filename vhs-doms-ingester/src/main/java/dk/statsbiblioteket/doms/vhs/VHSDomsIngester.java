@@ -52,7 +52,7 @@ public class VHSDomsIngester extends DomsIngester {
         String FFProbeOutput = vhsContext.getFfprobeContents();
 
         try {
-            String formatUri = new FFProbeParser(allowedFormats, false)
+            String formatUri = new FFProbeParser(allowedFormats)
                     .getFormatURIFromFFProbeOutput(FFProbeOutput);
 
             // Via DOMS Central, get PID of DOMS file-object which corresponds

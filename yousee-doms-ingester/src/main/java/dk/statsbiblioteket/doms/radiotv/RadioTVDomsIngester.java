@@ -44,7 +44,7 @@ public class RadioTVDomsIngester extends DomsIngester {
         String FFProbeOutput = radioTVContext.getFfprobeContents();
         
         try {
-            FFProbeParser ffProbeParser = new FFProbeParser(allowedFormats, appendCodecToFormatUri());
+            FFProbeParser ffProbeParser = new FFProbeParser(allowedFormats);
             String formatName = ffProbeParser.getFormatNameFromFFProbeOutput(FFProbeOutput);
             if(formatName.equals("mpeg") && (radioTVContext.getCrosscheckContents() != null)) {
                 throw new RuntimeException("The format name is " + formatName +
@@ -123,15 +123,6 @@ public class RadioTVDomsIngester extends DomsIngester {
         }
     }
    
-   
-    private boolean appendCodecToFormatUri() {
-        String allowedFormatName = config.getProperty(ALLOWED_FORMATS_PROPERTY);
-        if(allowedFormatName.equals("mpeg")) {
-            return false;
-        } else {
-            return true;
-        }
-    }
     /**
      * Method to check if the config and context is sane 
      */

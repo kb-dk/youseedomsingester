@@ -57,7 +57,7 @@ public class ReklameDomsIngester extends DomsIngester {
         try {
             // Via DOMS Central, get PID of DOMS file-object which corresponds
             // to the file with the given URL (URL from context).
-            String formatUri = new FFProbeParser(allowedFormats, false)
+            String formatUri = new FFProbeParser(allowedFormats)
                     .getFormatURIFromFFProbeOutput(FFProbeOutput);
             String message = "Processed by '" + getClass().getName() + "'";
             String fileObjectPid;

@@ -2,7 +2,12 @@ package dk.statsbiblioteket.doms.common;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -26,13 +31,11 @@ public class FFProbeParser {
 
     private final Map<String, String> allowedFormats;
     //private final String formaturi;
-    private final boolean appendCodecsToFormatUri;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public FFProbeParser(Map<String, String> allowedFormats, boolean appendCodecsToFormatUri) {
+    public FFProbeParser(Map<String, String> allowedFormats) {
         this.allowedFormats = allowedFormats;
         //this.formaturi = formaturi;
-        this.appendCodecsToFormatUri = appendCodecsToFormatUri;
     }
 
     public String getFormatNameFromFFProbeOutput(String FFProbeOutput)
@@ -101,10 +104,9 @@ public class FFProbeParser {
             format_uri = allowedFormats.get(format_name);
         } else {
             throw new RuntimeException("Invalid ffprobe file, bad format name. Format was: '" +
-                    format_name + "', allowed: '" + allowedFormats +"'");
+                    format_name + "', allowed: '" + allowedFormats.keySet() +"'");
         }
-
-        if(appendCodecsToFormatUri) {
+        if(!format_name.equals("mpeg")) {
             if (codecs.size() > 0){
                 format_uri= format_uri + ";codecs=\"";
                 for (int i = 0; i < codecs.size(); i++){
@@ -118,7 +120,8 @@ public class FFProbeParser {
             }
         }
 
-        log.debug("allowedformats: '" + allowedFormats + "', actual format: '" + format_uri +"'");
+        log.debug("allowedformats: '" + allowedFormats.toString() + "', actual format: '" +
+                format_name + "~" + format_uri +"'");
 
         return format_uri;
     }
