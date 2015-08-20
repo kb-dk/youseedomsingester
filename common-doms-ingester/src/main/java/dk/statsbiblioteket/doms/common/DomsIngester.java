@@ -109,7 +109,7 @@ public abstract class DomsIngester implements Ingester {
     protected Map<String,String> getAllowedFormatsProperty() {
         //TODO JSONParser?! (in JSON the ; should be :)
         Map<String, String> allowedFormats= new LinkedHashMap<String, String>();
-        String allowedFormatsString = config.getProperty(ALLOWED_FORMATS_PROPERTY, "\"mpeg\":\"info:pronom/x-fmt/386\"");
+        String allowedFormatsString = config.getProperty(ALLOWED_FORMATS_PROPERTY, "mpeg;info:pronom/x-fmt/386");
         String[] allowedFormatsStringArray = allowedFormatsString.split(",");
         for (String format:allowedFormatsStringArray) {
             String[] formatNameUri = format.split(";");
@@ -117,7 +117,7 @@ public abstract class DomsIngester implements Ingester {
                 allowedFormats.put(formatNameUri[0], formatNameUri[1]);
             } else {
                 throw new RuntimeException("Invalid allowedformats property in config file: '" +
-                        allowedFormatsString +"'");
+                        allowedFormatsString +"'\nWarning: you need to update your config to match the 2.0 release.");
             }
         }
         return allowedFormats;
