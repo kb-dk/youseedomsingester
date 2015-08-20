@@ -2,7 +2,6 @@ package dk.statsbiblioteket.doms.vhs;
 
 import dk.statsbiblioteket.doms.central.CentralWebservice;
 import dk.statsbiblioteket.doms.common.IngestContext;
-import dk.statsbiblioteket.util.Files;
 import org.junit.Test;
 
 import java.io.File;
@@ -22,13 +21,13 @@ public class VHSDomsIngesterTest {
     @Test
     public void testIngest() throws Exception {
         // Mock-up arguments
-        String resourceDir = new File(Thread.currentThread().getContextClassLoader().getResource("ffprobeSample.xml").toURI()).getParent();
+        String resourceDir = new File(Thread.currentThread().getContextClassLoader().getResource("ffprobeSample_ts.xml").toURI()).getParent();
 
         String[] args = {
                 "-filename", "testfile.ts",
-                "-ffprobe", resourceDir+"/ffprobeSample.xml",
-                "-ffprobeErrorLog", resourceDir+"/ffprobeSampleErrorLog.xml",
-                "-metadata", resourceDir+"/metadataSample.xml",
+                "-ffprobe", resourceDir+ "/ffprobeSample_ts.xml",
+                "-ffprobeErrorLog", resourceDir+ "/ffprobeSampleErrorLog_ts.xml",
+                "-metadata", resourceDir+ "/metadataSample_ts.xml",
                 //"-crosscheck", resourceDir+"/crosscheckSample.xml",
                 "-url", "http://localhost/testfile1.ts",
                 "-config", resourceDir+"/vhs-doms-ingester.properties"
@@ -64,15 +63,15 @@ public class VHSDomsIngesterTest {
     //@Ignore // new xsd's made this fail
     public void testIngestWithRealDOMS() throws Exception {
 
-        String resourceDir = new File(Thread.currentThread().getContextClassLoader().getResource("ffprobeSample.xml").toURI()).getParent();
+        String resourceDir = new File(Thread.currentThread().getContextClassLoader().getResource("ffprobeSample_ts.xml").toURI()).getParent();
 
         String[] args = {
-                "-filename", "testfile.mux",
-                "-ffprobe", resourceDir+"/ffprobeSample.xml",
-                "-ffprobeErrorLog", resourceDir+"/ffprobeSampleErrorLog.xml",
-                "-metadata", resourceDir+"/metadataSample.xml",
+                "-filename", "testfile.ts",
+                "-ffprobe", resourceDir+ "/ffprobeSample_ts.xml",
+                "-ffprobeErrorLog", resourceDir+ "/ffprobeSampleErrorLog_ts.xml",
+                "-metadata", resourceDir+ "/metadataSample_ts.xml",
                 //"-crosscheck", resourceDir+"/crosscheckSample.xml",
-                "-url", "http://localhost/testfile1.mux",
+                "-url", "http://localhost/testfile1.ts",
                 "-config", resourceDir+"/vhs-doms-ingester.properties"
         };
 
@@ -89,6 +88,7 @@ public class VHSDomsIngesterTest {
 
         Properties config = context.getConfig();
         uuid = new VHSIngesterFactory(context).getIngester().ingest(context);
+        //No asserts, but also no exceptions thrown, so we assume success
     }
 
     /**
