@@ -1,6 +1,7 @@
 package dk.statsbiblioteket.doms.radiotv;
 
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Properties;
 
 import dk.statsbiblioteket.doms.central.CentralWebservice;
@@ -36,15 +37,25 @@ public class RadioTVDomsIngester extends DomsIngester {
         checkConfig(radioTVContext);
         // Template object to clone to get new objects, get from properties file
         String template = config.getProperty(TEMPLATE_PROPERTY, "doms:Template_RadioTVFile"); 
-        String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY);
-        String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY);
+        Map<String,String> allowedFormats = getAllowedFormatsProperty();
+        //String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY);
         
         // Get FFProbe output from context
         String FFProbeOutput = radioTVContext.getFfprobeContents();
         
         try {
-            String formatUri = (new FFProbeParser(allowedFormatName, validFormatUri, appendCodecToFormatUri()))
-                    .getFormatURIFromFFProbeOutput(FFProbeOutput);
+            FFProbeParser ffProbeParser = new FFProbeParser(allowedFormats, appendCodecToFormatUri());
+            String formatName = ffProbeParser.getFormatNameFromFFProbeOutput(FFProbeOutput);
+            if(formatName.equals("mpeg") && (radioTVContext.getCrosscheckContents() != null)) {
+                throw new RuntimeException("The format name is " + formatName +
+                        ", and you provided crosscheckoutput, that cannot be.");
+            }
+            if(formatName.equals("mpegts") && (radioTVContext.getCrosscheckContents() == null)) {
+                throw new RuntimeException("The format name is " + formatName +
+                        ", and you didn't provide the required crosscheckoutput.");
+            }
+
+            String formatUri = ffProbeParser.getFormatURIFromFFProbeOutput(FFProbeOutput);
 
             // Via DOMS Central, get PID of DOMS file-object which corresponds
             // to the file with the given URL (URL from context).
@@ -114,7 +125,7 @@ public class RadioTVDomsIngester extends DomsIngester {
    
    
     private boolean appendCodecToFormatUri() {
-        String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY);
+        String allowedFormatName = config.getProperty(ALLOWED_FORMATS_PROPERTY);
         if(allowedFormatName.equals("mpeg")) {
             return false;
         } else {
@@ -127,21 +138,9 @@ public class RadioTVDomsIngester extends DomsIngester {
     private void checkConfig(RadioTVIngestContext context) {
         // TODO Consider moving into OptionParser class
         // TODO Make proper exceptions to toss
-        String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY); 
+        String allowedFormatName = config.getProperty(ALLOWED_FORMATS_PROPERTY);
         if(allowedFormatName == null) {
-            throw new RuntimeException("The config is missing '" + ALLOWED_FORMAT_NAME_PROPERTY + "'");
-        }
-        if(config.getProperty(FORMAT_URI_PROPERTY) == null) {
-            throw new RuntimeException("The config is missing '" + FORMAT_URI_PROPERTY + "'");
-        }
-        
-        if(allowedFormatName.equals("mpeg") && (context.getCrosscheckContents() != null)) {
-            throw new RuntimeException("The allowed format name is " + allowedFormatName + 
-                    ", and you provided crosscheckoutput, that can be.");
-        }
-        if(allowedFormatName.equals("mpegts") && (context.getCrosscheckContents() == null)) {
-            throw new RuntimeException("The allowed format name is " + allowedFormatName +
-                    ", and you didn't provide the required crosscheckoutput.");
+            throw new RuntimeException("The config is missing '" + ALLOWED_FORMATS_PROPERTY + "'");
         }
     }
 }

@@ -7,12 +7,15 @@ import dk.statsbiblioteket.doms.central.MethodFailedException;
 import dk.statsbiblioteket.doms.common.IngestContext;
 import dk.statsbiblioteket.doms.common.Ingester;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.w3c.dom.Document;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -20,8 +23,8 @@ import java.util.Properties;
  */
 public abstract class DomsIngester implements Ingester {
     protected static final String TEMPLATE_PROPERTY = "dk.statsbiblioteket.doms.common.template";
-    protected static final String ALLOWED_FORMAT_NAME_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformat";
-    protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
+    protected static final String ALLOWED_FORMATS_PROPERTY = "dk.statsbiblioteket.doms.common.allowedformats";
+    //protected static final String FORMAT_URI_PROPERTY = "dk.statsbiblioteket.doms.common.formaturi";
 
     protected final DocumentBuilder db;
     protected final CentralWebservice centralWebservice;
@@ -99,5 +102,25 @@ public abstract class DomsIngester implements Ingester {
         }
     }
 
+    /**
+     * Read the ALLOWED_FORMATS_PROPERTY from config, and transform into a Map.
+     * @return a Map of allowed format names mapping to format URIs
+     */
+    protected Map<String,String> getAllowedFormatsProperty() {
+        //TODO JSONParser?! (in JSON the ; should be :)
+        Map<String, String> allowedFormats= new LinkedHashMap<String, String>();
+        String allowedFormatsString = config.getProperty(ALLOWED_FORMATS_PROPERTY, "mpeg;info:pronom/x-fmt/386");
+        String[] allowedFormatsStringArray = allowedFormatsString.split(",");
+        for (String format:allowedFormatsStringArray) {
+            String[] formatNameUri = format.split(";");
+            if (formatNameUri.length==2) {
+                allowedFormats.put(formatNameUri[0], formatNameUri[1]);
+            } else {
+                throw new RuntimeException("Invalid allowedformats property in config file: '" +
+                        allowedFormatsString +"'\nWarning: you need to update your config to match the 2.0 release.");
+            }
+        }
+        return allowedFormats;
+    }
 
 }

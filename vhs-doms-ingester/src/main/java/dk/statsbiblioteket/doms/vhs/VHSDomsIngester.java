@@ -1,6 +1,8 @@
 package dk.statsbiblioteket.doms.vhs;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import dk.statsbiblioteket.doms.central.Relation;
@@ -43,14 +45,14 @@ public class VHSDomsIngester extends DomsIngester {
         }
 
 
-        String allowedFormatName = config.getProperty(ALLOWED_FORMAT_NAME_PROPERTY, "mpeg");
-        String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");
+        Map<String,String> allowedFormats = getAllowedFormatsProperty();
+        //String validFormatUri = config.getProperty(FORMAT_URI_PROPERTY, "info:pronom/x-fmt/386");
 
         // Get FFProbe output from context
         String FFProbeOutput = vhsContext.getFfprobeContents();
 
         try {
-            String formatUri = (new FFProbeParser(allowedFormatName, validFormatUri, false))
+            String formatUri = new FFProbeParser(allowedFormats, false)
                     .getFormatURIFromFFProbeOutput(FFProbeOutput);
 
             // Via DOMS Central, get PID of DOMS file-object which corresponds
