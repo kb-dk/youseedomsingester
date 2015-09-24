@@ -28,7 +28,7 @@ public class VHSDomsIngesterTest {
                 "-ffprobe", resourceDir+ "/ffprobeSample_ts.xml",
                 "-ffprobeErrorLog", resourceDir+ "/ffprobeSampleErrorLog_ts.xml",
                 "-metadata", resourceDir+ "/metadataSample_ts.xml",
-                //"-crosscheck", resourceDir+"/crosscheckSample.xml",
+                "-crosscheck", resourceDir+"/crosscheckSample.xml",
                 "-url", "http://localhost/testfile1.ts",
                 "-config", resourceDir+"/vhs-doms-ingester.properties"
         };
@@ -70,7 +70,7 @@ public class VHSDomsIngesterTest {
                 "-ffprobe", resourceDir+ "/ffprobeSample_ts.xml",
                 "-ffprobeErrorLog", resourceDir+ "/ffprobeSampleErrorLog_ts.xml",
                 "-metadata", resourceDir+ "/metadataSample_ts.xml",
-                //"-crosscheck", resourceDir+"/crosscheckSample.xml",
+                "-crosscheck", resourceDir+"/crosscheckSample.xml",
                 "-url", "http://localhost/testfile1.ts",
                 "-config", resourceDir+"/vhs-doms-ingester.properties"
         };

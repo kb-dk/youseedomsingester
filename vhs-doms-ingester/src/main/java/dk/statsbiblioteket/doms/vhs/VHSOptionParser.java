@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 
+import dk.statsbiblioteket.doms.radiotv.RadioTVOptionParser;
 import dk.statsbiblioteket.util.Files;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
@@ -23,6 +24,8 @@ import javax.xml.bind.JAXBException;
 /** Parse options */
 public class VHSOptionParser extends DomsOptionParser {
     private VHSIngestContext context;
+    private static final Option CROSSCHECK_LOCATION_OPTION
+            = new Option("crosscheck", true, "The file containing the crosscheck xml-profile");
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 
@@ -45,6 +48,7 @@ public class VHSOptionParser extends DomsOptionParser {
         options.addOption(DomsOptionParser.TEMPLATE_OPTION);
         options.addOption(DomsOptionParser.WSDL_OPTION);
         options.addOption(DomsOptionParser.PROGRAM_PID_OPTION);
+        options.addOption(VHSOptionParser.CROSSCHECK_LOCATION_OPTION);
 
     }
 
@@ -75,7 +79,19 @@ public class VHSOptionParser extends DomsOptionParser {
     }
     
     @Override
-    protected void parseSpecifics(CommandLine cmd) {
+    protected void parseSpecifics(CommandLine cmd) throws OptionParseException {
+        String crosscheckLocation = cmd.getOptionValue(CROSSCHECK_LOCATION_OPTION.getOpt());
+        if (crosscheckLocation != null) {
+            try {
+                String crosscheckContents = Files.loadString(new File(crosscheckLocation));
+                VHSIngestContext context = (VHSIngestContext) getContext();
+                context.setCrosscheckContents(crosscheckContents);
+            } catch (IOException e) {
+                parseError(e.toString());
+                throw new OptionParseException(e.toString());
+            }
+        }
+
         String programPid = cmd.getOptionValue(PROGRAM_PID_OPTION.getOpt());
         if (programPid != null) {
             ((VHSIngestContext) getContext()).setProgramPid(programPid);

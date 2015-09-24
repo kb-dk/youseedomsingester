@@ -78,6 +78,9 @@ public class VHSDomsIngester extends DomsIngester {
             // Update elements of object from context
             setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
                     "FFPROBE", vhsContext.getFfprobeContents(), message);
+            // CrosscheckProfile is assumed to be part of received metadata.
+            setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
+                    "CROSSCHECK", vhsContext.getCrosscheckContents(), message);
             // Checksum is assumed to be part of received metadata.
             setDatastreamContents(centralWebservice, PIDOfObjectWithURL,
                     "VHS_METADATA", vhsContext.getMetadataContents(),
