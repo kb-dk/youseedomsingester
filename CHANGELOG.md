@@ -1,3 +1,7 @@
+2.1
+====
+* VHS DOMS Ingester now expects crosscheck input!
+
 2.0
 ====
 FFProbe parser includes codecs on format uri for all formats other than mpeg.
